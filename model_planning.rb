@@ -42,3 +42,18 @@ List_item
     Model
         belongs_to :list
         belongs_to :item
+Recipe
+    Migration
+        t.string :name
+        t.string :directions
+    Model
+        validates :name, presence: true
+        has_many :recipe_items (view should allow for input to be auto-filled)
+Recipe_item
+    Migration
+        t.integer :recipe_id
+        t.integer :item_id
+        t.string :quantity
+    Model
+        belongs_to :recipe
+        belongs_to :item
