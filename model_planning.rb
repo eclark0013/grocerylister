@@ -23,3 +23,22 @@ Store_item
         belongs_to :store
         belongs_to :item
         #available? (defaults to true, open for extension)
+Item
+    Migration
+        t.string :name (view should allow for input to be auto-filled)
+    Model
+        validates :name, presence: true
+        has_many :store_items
+        has_many :stores, through: :store_items
+        has_many :list_items
+        has_many :lists, through: :list_items
+        has_many :recipe_items
+        has_many :recipes, through: :recipe_items
+List_item
+    Migration
+        t.integer :list_id
+        t.integer :item_id
+        t.string :quantity
+    Model
+        belongs_to :list
+        belongs_to :item
