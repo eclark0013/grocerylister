@@ -57,3 +57,35 @@ Recipe_item
     Model
         belongs_to :recipe
         belongs_to :item
+List
+    Migration
+        t.string :name
+        t.integer :user_id
+    Model   
+        validates :name, presence: true
+        #set_name (method that changes the name to the time it was updated in a readable format if it is left empty)
+        # the view page should contain a note about how this is what it will do if it is left blank
+        has_many :list_items
+        has_many :items, through :list_items
+        has many :recipes
+        has_many :recipe_items, through: :recipes
+        has_many :items, through: :recipe_items
+        belongs_to :user
+User
+    Migration
+        t.string :name
+        t.string :password_digest
+    Model
+        has_secure_password
+        has_many :lists
+        has_many :recipes
+        has_many :user_stores
+        has_many :stores, through: :user_stores
+User_stores
+    Migration
+        :user_id
+        :store_id
+    Model
+        belongs_to :user 
+        belongs_to :store
+        
