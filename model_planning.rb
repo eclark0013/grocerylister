@@ -42,7 +42,7 @@ List_item
     Model
         belongs_to :list
         belongs_to :item
-Recipe
+Recipe (nested under users?)
     Migration
         t.string :name
         t.text :directions
@@ -57,7 +57,7 @@ Recipe_item
     Model
         belongs_to :recipe
         belongs_to :item
-List
+List (nested under users?)
     Migration
         t.string :name
         t.integer :user_id
