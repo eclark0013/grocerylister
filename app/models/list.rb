@@ -1,4 +1,4 @@
-class List < ApplicationRecord #(nested under users?)
+class List < ApplicationRecord 
     validates :name, presence: true
     has_many :list_items
     has_many :items, through :list_items
