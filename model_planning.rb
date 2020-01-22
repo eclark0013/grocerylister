@@ -45,7 +45,7 @@ List_item
 Recipe
     Migration
         t.string :name
-        t.string :directions
+        t.text :directions
     Model
         validates :name, presence: true
         has_many :recipe_items (view should allow for input to be auto-filled)
