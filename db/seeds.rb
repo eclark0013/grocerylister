@@ -3,7 +3,28 @@
 #
 # Examples:
 #
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+#   movies = Movie.create([{ 'Star Wars' }, { 'Lord of the Rings' }])
+#   Character.create('Luke', movie: movies.first)
 DatabaseCleaner.strategy = :truncation
 DatabaseCleaner.clean
+
+User.create(name: "eric", password: "clark")
+
+items = [
+    "broccoli",
+    "pasta",
+    "chicken",
+    "garlic",
+    "extra virgin olive oil",
+    "pecorino romano cheese",
+    "salt",
+    "pepper",
+]
+
+items.each do |item|
+    Item.create(name: item)
+end
+
+Recipe.create(name: "Easy one-pot pasta")
+
+RecipeItem.create(recipe_id: Recipe.find_by(name: "Easy one-pot pasta").id, item_id: Item.find_by(name: "broccoli").id)
