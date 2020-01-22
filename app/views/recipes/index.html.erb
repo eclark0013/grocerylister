@@ -1,0 +1,9 @@
+<h2>Your recipes:</h2>
+<%= @your_recipes.each do |recipe| %>
+    <%= recipe.name %>
+<% end %><br>
+
+<h2>Public recipes:</h2>
+<%= @public_recipes.each do |recipe| %>
+    <%= recipe.name %>
+<% end %>
