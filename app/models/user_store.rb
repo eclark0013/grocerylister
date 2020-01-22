@@ -1,0 +1,2 @@
+class UserStore < ApplicationRecord
+end
