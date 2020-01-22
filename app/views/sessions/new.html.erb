@@ -1,6 +1,6 @@
-<%= form_for(@user), url: "/login", method: :post do |f| %>
+<%= form_with model: User.new, url: "/login", method: :post, local: true do |f| %>
   Username: <%= f.text_field :name %><br>
   Password: <%= f.password_field :password %>
-  <%= f.submit %>
+  <%= f.submit "Sign in" %>
 <% end %>
 

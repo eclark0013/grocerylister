@@ -1,5 +1,5 @@
 class Store < ApplicationRecord
-    validates :name, presence: true (possibly should add validation for address)
+    validates :name, presence: true # (possibly should add validation for address)
     has_many :areas
     has_many :store_items
     has_many :items, through: :store_items
