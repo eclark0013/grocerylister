@@ -1,7 +1,4 @@
-Welcome to your page <%= @user.name %>
+Welcome to your page <%= @user.name %><br>
 
-<%= form_with url: "/logout", method: :post, local: true do |f| %>
-    <%= f.submit "Logout" %>
-<% end %>
-  
-  
+<%= link_to "Recipes", recipes_path %>
+
