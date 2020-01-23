@@ -1,6 +1,6 @@
 <h2>Your recipes:</h2>
 <% @your_recipes.each do |recipe| %>
-    <%= "#{recipe.name} by you" %> 
+    <%= link_to recipe.name, recipe_path(recipe) %> by <%= link_to "you", user_path(current_user) %>
 <% end %><br>
 
 <h2>Public recipes:</h2>
