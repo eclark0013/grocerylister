@@ -11,25 +11,42 @@ DatabaseCleaner.clean
 u1 = User.create(name: "eric", password: "clark")
 u2 = User.create(name: "joey", password: "clark")
 
+grocery_categories = [
+    "refrigerated produce",
+    "other produce",
+    "frozen",
+    "dairy",
+    "meats & cheeses",
+    "dry goods",
+    "snacks",
+    "beverages",
+    "misc"
+]
+
+grocery_categories.each do |category|
+    GroceryCategory.create(name: category)
+end
+
 items = [
-    "broccoli",
-    "pasta",
-    "chicken",
-    "garlic",
-    "extra virgin olive oil",
-    "pecorino romano cheese",
-    "salt",
-    "pepper",
-    "shredded cheddar cheese",
-    "eggs",
-    "milk",
-    "red bell pepper",
-    "butter"
+    ["broccoli", "refrigerated produce"],
+    ["pasta", "dry goods"],
+    ["chicken", "frozen"],
+    ["garlic", "dry goods"],
+    ["extra virgin olive oil", "dry goods"],
+    ["pecorino romano cheese", "meats & cheeses"],
+    ["salt", "dry goods"],
+    ["pepper", "dry goods"],
+    ["shredded cheddar cheese", "meats & cheeses"],
+    ["eggs", "dairy"],
+    ["milk", "dairy"],
+    ["red bell pepper", "other produce"],
+    ["butter", "dairy"]
 ]
 
 items.each do |item|
-    Item.create(name: item)
+    Item.create(name: item[0], grocery_category_id: GroceryCategory.find_by(name: item[1]).id)
 end
+
 
 r1 = Recipe.create(name: "Easy one-pot pasta", user: u1, directions: "Cook the pasta with the broccoli. Cook the cicken separately and cut into small pieces. After pasta is in strainer, use pot to cook garlic in evoo. THen add back in the pasta with chicken and cheese.")
 r2 = Recipe.create(name: "Omelette with broccoli and red pepper", user: u2, directions: "Cook the broccoli and red peppers in pan with butter. Beat eggs, milk, salt, and pepper together. Add eggs and milk into pan. When finished top with cheese.")
