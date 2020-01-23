@@ -30,8 +30,8 @@ items.each do |item|
     Item.create(name: item)
 end
 
-r1 = Recipe.create(name: "Easy one-pot pasta")
-r2 = Recipe.create(name: "Omelette with broccoli and red pepper")
+r1 = Recipe.create(name: "Easy one-pot pasta", user: u1)
+r2 = Recipe.create(name: "Omelette with broccoli and red pepper", user: u2)
 
 # adding items to "Easy one-pot pasta"
     RecipeItem.create(recipe_id: r1.id, item_id: Item.find_by(name: "broccoli").id)
@@ -52,9 +52,3 @@ r2 = Recipe.create(name: "Omelette with broccoli and red pepper")
     RecipeItem.create(recipe_id: r2.id, item_id: Item.find_by(name: "broccoli").id)
     RecipeItem.create(recipe_id: r2.id, item_id: Item.find_by(name: "red bell pepper").id)
     RecipeItem.create(recipe_id: r2.id, item_id: Item.find_by(name: "pepper").id)
-
-r1.user = u1
-r2.user = u2
-
-r1.save
-r2.save

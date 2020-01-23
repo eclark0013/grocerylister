@@ -7,4 +7,9 @@ class RecipesController < ApplicationController
             redirect_to "/login"
         end
     end
+
+    def show
+        @recipe = Recipe.find(params[:id])
+        raise params.inspect
+    end
 end

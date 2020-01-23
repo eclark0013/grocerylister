@@ -7,6 +7,11 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <% if session[:name] %>
+      <%= link_to "Home", root_path %>
+    <% else %> 
+      <%= link_to "Sign In", '/login' %>
+    <% end %>
     <h1> Grocery Lister </h1>
   </head>
 

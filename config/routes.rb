@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
-  resources :users do
+  resources :users, only: [:show] do
     resources :lists
   end
-  resources :recipes
+  resources :recipes, only: [:index, :show]
   resources :items
   resources :stores
   get '/login' => 'sessions#new'

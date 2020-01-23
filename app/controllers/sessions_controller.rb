@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+    
     def new   
         if session[:name]
             redirect_to user_path(User.find_by(name: session[:name]))
