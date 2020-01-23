@@ -48,7 +48,7 @@ items.each do |item|
 end
 
 
-r1 = Recipe.create(name: "Easy one-pot pasta", user: u1, directions: "Cook the pasta with the broccoli. Cook the cicken separately and cut into small pieces. After pasta is in strainer, use pot to cook garlic in evoo. THen add back in the pasta with chicken and cheese.")
+r1 = Recipe.create(name: "Easy one-pot pasta", user: u1, directions: "Cook the pasta with the broccoli. Cook the chicken separately and cut into small pieces. After pasta is in strainer, use pot to cook garlic in evoo. Then add back in the pasta with chicken and cheese.")
 r2 = Recipe.create(name: "Omelette with broccoli and red pepper", user: u2, directions: "Cook the broccoli and red peppers in pan with butter. Beat eggs, milk, salt, and pepper together. Add eggs and milk into pan. When finished top with cheese.")
 
 # adding items to "Easy one-pot pasta"

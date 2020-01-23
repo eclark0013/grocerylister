@@ -11,4 +11,11 @@ class RecipesController < ApplicationController
     def show
         @recipe = Recipe.find(params[:id])
     end
+
+    def new
+    end
+
+    def create
+        raise params.inspect
+    end
 end

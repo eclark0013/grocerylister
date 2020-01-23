@@ -1,0 +1,12 @@
+Add ingredients with quantities below. Then add directions.
+
+<%= form_with model: Recipe.new, local: true do |f| %>
+    <%= f.label :item_1 %>
+    <%= f.text_field :item_1 %><br>
+    <%= f.label :item_2 %>
+    <%= f.text_field :item_2 %><br>
+    <%= f.label :directions %>
+    <%= f.text_field :directions, size: 30 %><br>
+    <%= f.submit %>
+<% end %>
+
