@@ -18,7 +18,7 @@
   <body>
     <%= yield %>
 
-    <br>
+    <br><br>
     <% if session[:name] %>
       <%= form_with url: "/logout", method: :post, local: true do |f| %>
         <%= f.submit "Logout" %>
