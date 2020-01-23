@@ -1,0 +1,2 @@
+class GroceryCategory < ApplicationRecord
+end

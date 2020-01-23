@@ -10,17 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_22_161821) do
+ActiveRecord::Schema.define(version: 2020_01_23_174226) do
 
-  create_table "areas", force: :cascade do |t|
+  create_table "grocery_categories", force: :cascade do |t|
     t.string "name"
-    t.integer "store_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "items", force: :cascade do |t|
     t.string "name"
+    t.integer "grocery_category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
