@@ -10,5 +10,6 @@
 <% end %>
 </ul>
 <h3>Directions:</h3>
-<%= @recipe.directions %>
+<%= @recipe.directions %><br><br>
+<%= link_to "Edit recipe", edit_recipe_path(@recipe) %>
 

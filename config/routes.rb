@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
   resources :users, only: [:show] do
-    resources :lists
+    resources :lists, only: [:index]
   end
-  resources :recipes, only: [:index, :show, :new, :create]
-  resources :items
-  resources :stores
+  resources :recipes, only: [:index, :show, :new, :create, :edit, :update]
+  resources :items, only: [:index]
+  resources :stores, only: [:index]
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
   post '/logout' => 'sessions#destroy'

@@ -1,3 +1,5 @@
+Edit page for <%= @recipe.name %>
+
 <%= form_with model: @recipe, local: true do |f| %>
     <%= f.label :name%>
     <%= f.text_field :name, placeholder: "Chicken Parmesan" %><br><br>
@@ -23,4 +25,5 @@
     <%= f.text_field :directions, size: 30 %><br>
     <%= f.submit %>
 <% end %>
+
 
