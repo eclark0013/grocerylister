@@ -17,8 +17,19 @@ class RecipesController < ApplicationController
     end
 
     def create
-        raise recipe_params.inspect
-        @recipe = Recipe.create(name)
+        @recipe = Recipe.create(
+            user: current_user, 
+            name: recipe_params[:name], 
+            directions: recipe_params[:directions]
+            )
+        (0..19).each do |num|
+            item_attributes = recipe_params[:items_attributes][num.to_s]
+            unless item_attributes[:name].strip.empty?
+                item = Item.find_or_create_by(name: item_attributes[:name])
+                @recipe.recipe_items.build(item_id: item.id, quantity: item_attributes[:quantity]).save
+            end
+        end
+        redirect_to recipe_path(@recipe)
     end
 
     private

@@ -5,7 +5,7 @@
     <%= f.label :name%>
     <%= f.text_field :name, placeholder: "Chicken Parmesan" %><br><br>
     Add ingredients with quantities below. Then add directions.<br>
-    <% 4.times do %>
+    <% 20.times do %>
         <%= f.fields_for :items, @recipe.items.build do |items_fields| %>
             <%= items_fields.label :name %>
             <%= items_fields.text_field :name, list: "item names" %> 
