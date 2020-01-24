@@ -6,4 +6,7 @@ class Item < ApplicationRecord
     has_many :lists, through: :list_items
     has_many :recipe_items
     has_many :recipes, through: :recipe_items
+
+    attr_accessor :quantity
+    
 end

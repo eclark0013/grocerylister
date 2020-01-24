@@ -1,10 +1,17 @@
 Add ingredients with quantities below. Then add directions.
 
-<%= form_with model: Recipe.new, local: true do |f| %>
-    <%= f.label :item_1 %>
-    <%= f.text_field :item_1 %><br>
-    <%= f.label :item_2 %>
-    <%= f.text_field :item_2 %><br>
+<%= form_with model: @recipe, local: true do |f| %>
+    Items: <br>
+    <% 4.times do %>
+        <%= f.fields_for :items, @recipe.items.build do |items_fields| %>
+            <%= items_fields.label :name %>
+            <%= items_fields.text_field :name %>
+            <%= items_fields.label :quantity %>
+            <%= items_fields.text_field :quantity %>
+            <br>
+        <% end %>
+    <% end %>
+    <br>
     <%= f.label :directions %>
     <%= f.text_field :directions, size: 30 %><br>
     <%= f.submit %>
