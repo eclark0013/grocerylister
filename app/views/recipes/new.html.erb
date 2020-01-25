@@ -1,7 +1,7 @@
 <%= form_with model: @recipe, local: true do |f| %>
     <%= f.label :name%>
     <%= f.text_field :name, placeholder: "Chicken Parmesan" %><br><br>
-    Add ingredients with quantities below. Then add directions.<br>
+    Add ingredients with quantities below. Then add directions.<br><br>
     <% 20.times do %>
         <%= f.fields_for :recipe_items, @recipe.recipe_items.build do |recipe_items_fields| %>
             <label> Ingredient </label>
@@ -18,7 +18,7 @@
     <% end %>
     <br>
     <%= f.label :directions %>
-    <%= f.text_field :directions, size: 30 %><br>
+    <%= f.text_field :directions, size: 30 %><br><br>
     <%= f.submit %>
 <% end %>
 

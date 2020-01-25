@@ -22,7 +22,7 @@ class RecipesController < ApplicationController
             name: recipe_params[:name], 
             directions: recipe_params[:directions]
             )
-        (0..recipe_params[:recipe_items_attributes].length).each do |num|
+        (0..recipe_params[:recipe_items_attributes].length-1).each do |num|
             num = num.to_s
             recipe_items_attributes = recipe_params[:recipe_items_attributes]
             unless recipe_items_attributes[num][:name_of_item].strip.empty?
@@ -45,11 +45,8 @@ class RecipesController < ApplicationController
         @recipe = Recipe.find(params[:id])
         @recipe.name = recipe_params[:name]
         @recipe.directions = recipe_params[:directions]
-        @recipe.recipe_items.destroy_all # because otherwise vestiges of old ingredients will be left behind
+        @recipe.recipe_items.destroy_all # because otherwise removed ingredients will still be part of the recipe
         (0..(recipe_params[:recipe_items_attributes].length - 1)).each do |num|
-            # if num == 3
-            #     raise @recipe.inspect
-            # end
             num = num.to_s
             recipe_items_attributes = recipe_params[:recipe_items_attributes]
             unless recipe_items_attributes[num][:name_of_item].strip.empty?
@@ -60,6 +57,7 @@ class RecipesController < ApplicationController
                 @recipe_item.save
             end
         end
+        @recipe.save
         redirect_to recipe_path(@recipe)
     end
 
