@@ -61,6 +61,11 @@ class RecipesController < ApplicationController
         redirect_to recipe_path(@recipe)
     end
 
+    def destroy 
+        Recipe.find(params[:id]).destroy
+        redirect_to recipes_path
+    end
+
     private
     def recipe_params
         params.require(:recipe).permit(:name, :directions, recipe_item_ids:[], recipe_items_attributes: [:quantity, :name_of_item]).to_h

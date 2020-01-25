@@ -35,8 +35,10 @@ Edit page for <%= @recipe.name %>
     <br>
 
     <%= f.label :directions %>
-    <%= f.text_field :directions, size: 30 %><br>
+    <%= f.text_field :directions, size: 30 %><br><br>
     <%= f.submit %>
+    <br><br>
+    <%= button_to "Delete Recipe", recipe_path(@recipe), method: :delete %>
 <% end %>
 
 
