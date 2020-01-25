@@ -16,19 +16,22 @@ class RecipesController < ApplicationController
         @recipe = Recipe.new
     end
 
-    def create
+    def create 
         @recipe = Recipe.create(
             user: current_user, 
             name: recipe_params[:name], 
             directions: recipe_params[:directions]
             )
-        (0..19).each do |num|
-            unless recipe_params[:items_attributes][num.to_s][:name].strip.empty?
-                item = Item.find_or_create_by(name: recipe_params[:items_attributes][num.to_s][:name])
-                @recipe.recipe_items.build(
+        (0..recipe_params[:recipe_items_attributes].length).each do |num|
+            num = num.to_s
+            recipe_items_attributes = recipe_params[:recipe_items_attributes]
+            unless recipe_items_attributes[num][:name_of_item].strip.empty?
+                item = Item.find_or_create_by(name: recipe_items_attributes[num][:name_of_item])
+                @recipe_item = @recipe.recipe_items.build(
                     item_id: item.id, 
-                    quantity: recipe_params[:recipe_items_attributes][num.to_s][:quantity]
-                    ).save
+                    quantity: recipe_params[:recipe_items_attributes][num][:quantity]
+                    )
+                @recipe_item.save
             end
         end
         redirect_to recipe_path(@recipe)
@@ -39,11 +42,29 @@ class RecipesController < ApplicationController
     end
 
     def update
-        raise params.inspect
+        @recipe = Recipe.find(params[:id])
+        @recipe.name = recipe_params[:name]
+        @recipe.directions = recipe_params[:directions]
+        @recipe.recipe_items.destroy_all # because otherwise vestiges of old ingredients will be left behind
+        (0..(recipe_params[:recipe_items_attributes].length - 1)).each do |num|
+            # if num == 3
+            #     raise @recipe.inspect
+            # end
+            num = num.to_s
+            recipe_items_attributes = recipe_params[:recipe_items_attributes]
+            unless recipe_items_attributes[num][:name_of_item].strip.empty?
+                item = Item.find_or_create_by(name: recipe_items_attributes[num][:name_of_item])
+                @recipe_item = RecipeItem.find_or_create_by(item_id: item.id)
+                @recipe_item.recipe = @recipe
+                @recipe_item.quantity = recipe_params[:recipe_items_attributes][num][:quantity]
+                @recipe_item.save
+            end
+        end
+        redirect_to recipe_path(@recipe)
     end
 
     private
     def recipe_params
-        params.require(:recipe).permit(:name, :directions, item_ids:[], items_attributes: [:name],  recipe_item_ids:[], recipe_items_attributes: [:quantity])
+        params.require(:recipe).permit(:name, :directions, recipe_item_ids:[], recipe_items_attributes: [:quantity, :name_of_item]).to_h
     end 
 end
