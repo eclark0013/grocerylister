@@ -1,0 +1,18 @@
+<% @list.recipes.each do |recipe| %>
+    <%= recipe.name %>
+    <ul>
+    <% recipe.recipe_items.each do |recipe_item| %>
+        <li>
+            <%= recipe_item.item_name %>
+            (<%= recipe_item.quantity %>)
+        </li>
+    <% end %>
+    </ul>
+<% end %>
+
+<% @list.list_items.each do |list_item| %>
+    <li>
+        <%= list_item.item_name %>
+        (<%= list_item.quantity %>)
+    </li>
+<% end %>

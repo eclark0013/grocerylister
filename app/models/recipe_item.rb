@@ -2,7 +2,7 @@ class RecipeItem < ApplicationRecord
     belongs_to :recipe
     belongs_to :item
 
-    def name_of_item
+    def item_name
         if self.item
             self.item.name
         else
@@ -10,7 +10,7 @@ class RecipeItem < ApplicationRecord
         end
     end
 
-    def name_of_item=(name)
+    def item_name=(name)
         if self.item
             self.item.name=(name)
             self.item.save
