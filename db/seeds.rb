@@ -70,3 +70,8 @@ r2 = Recipe.create(name: "Omelette with broccoli and red pepper", user: u2, dire
     RecipeItem.create(recipe_id: r2.id, item_id: Item.find_by(name: "broccoli").id, quantity: "1/2 cup")
     RecipeItem.create(recipe_id: r2.id, item_id: Item.find_by(name: "red bell pepper").id, quantity: "1/4 cup")
     RecipeItem.create(recipe_id: r2.id, item_id: Item.find_by(name: "pepper").id, quantity: "to taste")
+
+l1 = List.create(name: "The best grocery trip ever")
+
+# adding recipes to l1
+    List
