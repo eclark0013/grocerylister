@@ -1,4 +1,4 @@
-<%= @list.name %>
+<%= @list.name %><br>
 
 <% @list.list_recipes.each do |list_recipe| %>
     <%= list_recipe.recipe.name %>
@@ -12,9 +12,9 @@
     </ul>
 <% end %>
 
-<% @list.list_items.each do |list_item| %>
+<% @list.individual_items.each do |individual_item| %>
     <li>
-        <%= list_item.item_name %>
-        (<%= list_item.quantity %>)
+        <%= individual_item.item_name %>
+        (<%= individual_item.quantity %>)
     </li>
 <% end %>

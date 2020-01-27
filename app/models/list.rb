@@ -1,7 +1,7 @@
 class List < ApplicationRecord 
     validates :name, presence: true
-    has_many :list_items
-    has_many :items, through: :list_items
+    has_many :individual_items
+    has_many :items, through: :individual_items
     has_many :list_recipes
     has_many :recipes, through: :list_recipes
     has_many :recipe_items, through: :recipes

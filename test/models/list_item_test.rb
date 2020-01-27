@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ListItemTest < ActiveSupport::TestCase
+class IndividualItemTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
