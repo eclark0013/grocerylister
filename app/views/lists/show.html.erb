@@ -5,7 +5,7 @@
     <ul>
     <% list_recipe.recipe.recipe_items.each do |recipe_item| %>
         <li>
-            <%= recipe_item.item_name %>
+            <%= recipe_item.name %>
             (<%= recipe_item.quantity %>)
         </li>
     <% end %>
@@ -14,7 +14,7 @@
 
 <% @list.individual_items.each do |individual_item| %>
     <li>
-        <%= individual_item.item_name %>
+        <%= individual_item.name %>
         (<%= individual_item.quantity %>)
     </li>
 <% end %>

@@ -28,13 +28,18 @@ Item
         t.string :name (view should allow for input to be auto-filled)
     Model
         validates :name, presence: true
+
         has_many :store_items
         has_many :stores, through: :store_items
-        has_many :individual_items
-        has_many :lists, through: :individual_items
+
+        has_many :additional_items
+        has_many :lists, through: :additional_items
+
         has_many :recipe_items
         has_many :recipes, through: :recipe_items
-Individual_item
+
+        has_many :purchase_items
+Additional_item
     Migration
         t.integer :list_id
         t.integer :item_id
@@ -65,11 +70,12 @@ List (nested under users?)
         validates :name, presence: true
         #set_name (method that changes the name to the time it was updated in a readable format if it is left empty)
         # the view page should contain a note about how this is what it will do if it is left blank
-        has_many :individual_items
-        has_many :items, through :individual_items
+        has_many :additional_items
+        
         has many :recipes
         has_many :recipe_items, through: :recipes
-        has_many :items, through: :recipe_items
+
+        
         belongs_to :user
 User
     Migration
@@ -88,4 +94,10 @@ User_stores
     Model
         belongs_to :user 
         belongs_to :store
-        
+Purchase_item
+    Migration
+        t.string :name
+        t.string :quantity
+    Model
+        belongs_to :list
+        belongs_to :item

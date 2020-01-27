@@ -5,10 +5,10 @@
     <% 20.times do %>
         <%= f.fields_for :recipe_items, @recipe.recipe_items.build do |recipe_items_fields| %>
             <label> Ingredient </label>
-            <%= recipe_items_fields.text_field :item_name, list: "item names" %> 
+            <%= recipe_items_fields.text_field :name, list: "item names" %> 
             <datalist id="item names">
-                <% Item.pluck(:name).each do |item_name| %>
-                    <option value="<%= item_name %>">
+                <% Item.pluck(:name).each do |name| %>
+                    <option value="<%= name %>">
                 <% end %>
             </datalist>
             <%= recipe_items_fields.label :quantity %>
