@@ -18,13 +18,17 @@ class ListsController < ApplicationController
 
     def create
         list = List.create(name: list_params[:name], user_id: current_user.id)
+        if list.name == ""
+            list.name = Time.now.strftime("List for %m/%d/%Y at %I:%M%p")
+        end
         list_params[:recipes_attributes].each do |recipe_attributes_array|
             recipe_attributes = recipe_attributes_array.last
             if recipe_attributes[:included] == "1"
                 list.list_recipes.build(recipe_id: recipe_attributes[:id].to_i).save
             end
         end
-        raise list.inspect
+        raise params.inspect
+        redirect_to user_list_path(current_user, list)
     end
 
     private
