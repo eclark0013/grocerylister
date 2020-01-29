@@ -10,4 +10,7 @@ class Recipe < ApplicationRecord
 
     # accepts_nested_attributes_for :items
     accepts_nested_attributes_for :recipe_items
+
+    def included
+    end
 end

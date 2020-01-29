@@ -4,8 +4,8 @@
     Choose recipes to add to list below.<br><br>
     <% Recipe.all.each do |recipe| %>
         <%= f.fields_for :recipes, recipe do |recipes_fields| %>
-            <%= recipes_fields.check_box :id %>
-            <label> <%= recipe.name %> </label><br>
+            <%= recipes_fields.check_box :included  %>
+            <%= recipes_fields.label :"#{recipe.name}" %>
         <% end %><br>
     <% end %>
 

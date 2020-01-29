@@ -17,7 +17,19 @@ class ListsController < ApplicationController
     end
 
     def create
-        raise params.inspect
+        list = List.create(name: list_params[:name], user_id: current_user.id)
+        list_params[:recipes_attributes].each do |recipe_attributes_array|
+            recipe_attributes = recipe_attributes_array.last
+            if recipe_attributes[:included] == "1"
+                list.list_recipes.build(recipe_id: recipe_attributes[:id].to_i).save
+            end
+        end
+        raise list.inspect
     end
+
+    private
+    def list_params
+        params.require(:list).permit(:name, recipes_ids:[], recipes_attributes: [:included, :id]).to_h
+    end 
 
 end
