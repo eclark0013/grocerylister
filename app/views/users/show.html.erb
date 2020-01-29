@@ -1,4 +1,5 @@
 Welcome to your page <%= @user.name %><br>
 
-<%= link_to "Recipes", recipes_path %>
+<%= link_to "Recipes", recipes_path %><br>
+<%= link_to "Make New List", new_user_list_path(current_user) %>
 

@@ -50,6 +50,7 @@ end
 
 r1 = Recipe.create(name: "Easy one-pot pasta", user: u1, directions: "Cook the pasta with the broccoli. Cook the chicken separately and cut into small pieces. After pasta is in strainer, use pot to cook garlic in evoo. Then add back in the pasta with chicken and cheese.")
 r2 = Recipe.create(name: "Omelette with broccoli and red pepper", user: u2, directions: "Cook the broccoli and red peppers in pan with butter. Beat eggs, milk, salt, and pepper together. Add eggs and milk into pan. When finished top with cheese.")
+r3 = Recipe.create(name: "PB & J", user: u2, directions: "Put together the peanut butter and jelly to make a sandwich.")
 
 # adding items to "Easy one-pot pasta"
     RecipeItem.create(recipe_id: r1.id, item_id: Item.find_by(name: "broccoli").id, quantity: "6 cups")
@@ -70,5 +71,10 @@ r2 = Recipe.create(name: "Omelette with broccoli and red pepper", user: u2, dire
     RecipeItem.create(recipe_id: r2.id, item_id: Item.find_by(name: "broccoli").id, quantity: "1/2 cup")
     RecipeItem.create(recipe_id: r2.id, item_id: Item.find_by(name: "red bell pepper").id, quantity: "1/4 cup")
     RecipeItem.create(recipe_id: r2.id, item_id: Item.find_by(name: "pepper").id, quantity: "to taste")
+
+# adding items to "PB & J"
+    RecipeItem.create(recipe_id: r3.id, item_id: Item.find_or_create_by(name: "peanut butter").id, quantity: "1 tablespoon")
+    RecipeItem.create(recipe_id: r3.id, item_id: Item.find_or_create_by(name: "jelly").id, quantity: "1 tablespoon")
+    RecipeItem.create(recipe_id: r3.id, item_id: Item.find_or_create_by(name: "bread").id, quantity: "2 slices")
 
 l1 = List.create(name: "The best grocery trip ever")

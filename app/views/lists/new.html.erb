@@ -1,0 +1,16 @@
+<%= form_with model: @list, url: user_lists_path(@user), local: true do |f| %>
+    <%= f.label :name%>
+    <%= f.text_field :name %><br><br>
+    Choose recipes to add to list below.<br><br>
+    <% Recipe.all.each do |recipe| %>
+        <%= f.fields_for :recipes, recipe do |recipes_fields| %>
+            <%= recipes_fields.check_box :id %>
+            <label> <%= recipe.name %> </label><br>
+        <% end %><br>
+    <% end %>
+
+
+
+    <%= f.submit %>
+<% end %>
+
