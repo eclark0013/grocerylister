@@ -19,18 +19,20 @@ class ListsController < ApplicationController
     def create
         list_name = list_params[:name]
         if list_name == ""
-            list_name = Time.now.strftime("List for %m/%d/%Y at %I:%M%p")
+            list_name = Time.now.strftime("List created %m/%d/%Y at %I:%M%p")
         end
         list = List.create(
             name: list_name,
             user_id: current_user.id
             )
+        # add_recipes_to_list
         list_params[:recipes_attributes].each do |recipe_attributes_array|
             recipe_attributes = recipe_attributes_array.last
             if recipe_attributes[:included] == "1"
                 list.list_recipes.build(recipe_id: recipe_attributes[:id].to_i).save
             end
         end
+        # add_additional_items_to_list
         list_params[:additional_items_attributes].each do |additional_items_array|
             additional_item_attributes = additional_items_array.last
             name = additional_item_attributes[:name]
