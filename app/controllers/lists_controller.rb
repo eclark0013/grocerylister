@@ -17,23 +17,36 @@ class ListsController < ApplicationController
     end
 
     def create
-        list = List.create(name: list_params[:name], user_id: current_user.id)
-        if list.name == ""
-            list.name = Time.now.strftime("List for %m/%d/%Y at %I:%M%p")
+        list_name = list_params[:name]
+        if list_name == ""
+            list_name = Time.now.strftime("List for %m/%d/%Y at %I:%M%p")
         end
+        list = List.create(
+            name: list_name,
+            user_id: current_user.id
+            )
         list_params[:recipes_attributes].each do |recipe_attributes_array|
             recipe_attributes = recipe_attributes_array.last
             if recipe_attributes[:included] == "1"
                 list.list_recipes.build(recipe_id: recipe_attributes[:id].to_i).save
             end
         end
-        raise params.inspect
+        list_params[:additional_items_attributes].each do |additional_items_array|
+            additional_item_attributes = additional_items_array.last
+            name = additional_item_attributes[:name]
+            if name != ""
+                list.additional_items.build(
+                    item_id: Item.find_or_create_by(name: name).id,
+                    quantity: additional_item_attributes[:quantity]
+                    ).save
+            end
+        end
         redirect_to user_list_path(current_user, list)
     end
 
     private
     def list_params
-        params.require(:list).permit(:name, recipes_ids:[], recipes_attributes: [:included, :id]).to_h
+        params.require(:list).permit(:name, recipes_ids:[], recipes_attributes: [:included, :id], additional_items_attributes: [:name, :quantity]).to_h
     end 
 
 end

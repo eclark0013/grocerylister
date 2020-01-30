@@ -12,9 +12,12 @@
     </ul>
 <% end %>
 
+Additional Items
+<ul>
 <% @list.additional_items.each do |additional_item| %>
     <li>
         <%= additional_item.name %>
         (<%= additional_item.quantity %>)
     </li>
 <% end %>
+</ul>
