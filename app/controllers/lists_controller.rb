@@ -59,8 +59,7 @@ class ListsController < ApplicationController
 
     def edit
         @list = List.find(params[:id])
-        @user = current_user
-         
+        @user = current_user 
     end
 
     def update
@@ -94,6 +93,11 @@ class ListsController < ApplicationController
             end
         end
         redirect_to user_list_path(current_user, @list)
+    end
+
+    def destroy 
+        List.find(params[:id]).destroy
+        redirect_to user_lists_path(current_user)
     end
 
     private
