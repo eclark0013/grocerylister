@@ -23,6 +23,9 @@
     <% unless request.original_fullpath == recipes_path %>
       <br><%= link_to "Recipes", recipes_path %>
     <% end %>
+    <% unless request.original_fullpath == user_lists_path(current_user) %>
+      <br><%= link_to "Lists", user_lists_path(current_user) %>
+    <% end %>
     
     <% if session[:name] %>
     <br>

@@ -12,6 +12,8 @@ class Item < ApplicationRecord
 
     has_many :list_items
 
+    belongs_to :grocery_category
+
     attr_accessor :quantity
 
 end
