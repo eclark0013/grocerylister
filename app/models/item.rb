@@ -10,18 +10,11 @@ class Item < ApplicationRecord
     has_many :recipe_items
     has_many :recipes, through: :recipe_items
 
-    has_many :list_items
+    has_many :purchase_items
 
     belongs_to :grocery_category
 
     attr_accessor :quantity
 
-    def grocery_category_name
-        if self.grocery_category 
-            self.grocery_category.name
-        else
-            "No Category Given"
-        end
-    end
 
 end

@@ -49,7 +49,8 @@ ActiveRecord::Schema.define(version: 2020_01_27_215003) do
 
   create_table "purchase_items", force: :cascade do |t|
     t.string "name"
-    t.string "quantity"
+    t.string "quantity", default: ""
+    t.integer "item_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

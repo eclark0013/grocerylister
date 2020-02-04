@@ -95,6 +95,17 @@ class ListsController < ApplicationController
         redirect_to user_list_path(current_user, @list)
     end
 
+    def prepare
+        @list = List.find(params[:id])
+        @user = current_user
+        @purchase_items = []
+        @list.recipes.each do |recipe|
+            recipe.recipe_items.each do |recipe_item|
+                purchase_item = PurchaseItem.find_or_create_by(item_id: recipe_item.item.id)
+            end
+        end
+    end
+
     def destroy 
         List.find(params[:id]).destroy
         redirect_to user_lists_path(current_user)
