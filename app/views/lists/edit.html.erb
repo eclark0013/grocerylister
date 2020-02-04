@@ -1,0 +1,31 @@
+<%= form_with model: @list, url: user_lists_path(@user), local: true do |f| %>
+    <%= f.label :name%>
+    <%= f.text_field :name %><br><br>
+    Choose recipes to add to list below.<br><br>
+    <% Recipe.all.each do |recipe| %>
+        <%= f.fields_for :recipes, recipe do |recipes_fields| %>
+            <%= recipes_fields.check_box :included  %>
+            <%= recipes_fields.label :"#{recipe.name}" %>
+        <% end %><br>
+    <% end %>
+    Add any individual items with quantities below.<br><br>
+    <% 20.times do %>
+        <%= f.fields_for :additional_items, @list.additional_items.build do |additional_items_fields| %>
+            <label> Item </label>
+            <%= additional_items_fields.text_field :name, list: "item names" %> 
+            <datalist id="item names">
+                <% Item.pluck(:name).each do |name| %>
+                    <option value="<%= name %>">
+                <% end %>
+            </datalist>
+            <%= additional_items_fields.label :quantity %>
+            <%= additional_items_fields.text_field :quantity %><br>
+        <% end %>
+        <br>
+    <% end %>
+
+
+
+    <%= f.submit %>
+<% end %>
+
