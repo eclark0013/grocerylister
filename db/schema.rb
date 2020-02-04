@@ -26,28 +26,11 @@ ActiveRecord::Schema.define(version: 2020_01_27_215003) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "individual_items", force: :cascade do |t|
-    t.integer "list_id"
-    t.integer "item_id"
-    t.string "quantity"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "items", force: :cascade do |t|
     t.string "name"
-    t.integer "grocery_category_id"
+    t.integer "grocery_category_id", default: 9
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "list_items", force: :cascade do |t|
-    t.string "quantity"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "list_id"
-    t.string "name"
-    t.integer "item_id"
   end
 
   create_table "list_recipes", force: :cascade do |t|
