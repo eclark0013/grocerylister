@@ -1,4 +1,6 @@
-<%= form_with model: @list, url: user_lists_path(@user), local: true do |f| %>
+<h3>Edit page for <%= @list.name %></h3>
+
+<%= form_with model: @list, url: user_list_path(@user, @list), local: true do |f| %>
     <%= f.label :name%>
     <%= f.text_field :name %><br><br>
     Choose recipes to add to list below.<br><br>
@@ -9,8 +11,15 @@
         <% end %><br>
     <% end %>
     Add any individual items with quantities below.<br><br>
-  
-    <% 20.times do %>
+    <% @list.additional_items.each do |additional_item| %>
+        <%= f.fields_for :additional_items, additional_item do |additional_items_fields| %>
+            <label> Item </label>
+            <%= additional_items_fields.text_field :name, list: "item names" %> 
+            <%= additional_items_fields.label :quantity %>
+            <%= additional_items_fields.text_field :quantity %><br>
+        <% end %><br>
+    <% end %>
+    <% 15.times do %>
         <%= f.fields_for :additional_items, @list.additional_items.build do |additional_items_fields| %>
             <label> Item </label>
             <%= additional_items_fields.text_field :name, list: "item names" %> 

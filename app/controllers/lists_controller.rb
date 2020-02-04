@@ -1,5 +1,15 @@
 class ListsController < ApplicationController
     
+    def index
+        if current_user
+            @your_lists = List.where(user_id: current_user.id)
+            @public_lists = List.where.not(user_id: current_user.id)
+            @user = current_user
+        else
+            redirect_to "/login"
+        end
+    end
+    
     def show
         @list = List.find(params[:id])
         @user = current_user 

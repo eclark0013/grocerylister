@@ -1,0 +1,20 @@
+<%= link_to "Make new list", new_user_list_path(@user) %>
+<h2>Your lists:</h2>
+<ul>
+    <li>
+        <% @your_lists.each do |list| %>
+            <%= link_to list.name, user_list_path(@user, list) %> 
+            by <%= link_to "you", user_path(current_user) %>
+            (<%= link_to "Edit list", edit_user_list_path(@user, list) %>)<br>
+        <% end %>
+    </li>
+</ul>
+
+<h2>Public lists:</h2>
+<ul>
+    <li>
+        <% @public_lists.each do |list| %>
+            <%= link_to list.name, user_list_path(list.user, list) %> by <%= link_to list.user.name, user_path(list.user) %>
+        <% end %>
+    </li>
+</ul>
