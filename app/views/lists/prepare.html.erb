@@ -2,3 +2,11 @@ You made it to the preparation for:<br>
 List: <%= @list.name %><br>
 by:<br>
 User: <%= @user.name %>
+<ul>
+<% @purchase_items.each do |purchase_item| %>
+    <li>
+        <%= purchase_item.item.name %>
+        (<%= purchase_item.quantity %>)
+    </li>
+<% end %>
+</ul>

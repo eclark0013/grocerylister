@@ -98,12 +98,30 @@ class ListsController < ApplicationController
     def prepare
         @list = List.find(params[:id])
         @user = current_user
-        @purchase_items = []
+        PurchaseItem.all.where(list_id: @list.id).destroy_all
         @list.recipes.each do |recipe|
             recipe.recipe_items.each do |recipe_item|
-                purchase_item = PurchaseItem.find_or_create_by(item_id: recipe_item.item.id)
+                purchase_item = PurchaseItem.find_or_create_by(item_id: recipe_item.item.id, list_id: @list.id)
+                purchase_item.update(name: purchase_item.item.name)
+                if purchase_item.quantity == ""
+                    purchase_item.quantity += recipe_item.quantity
+                else
+                    purchase_item.quantity += (", " + recipe_item.quantity)
+                end
+                purchase_item.save
             end
         end
+        @list.additional_items.each do |additional_item|
+            purchase_item = PurchaseItem.find_or_create_by(item_id: additional_item.item.id, list_id: @list.id)
+            purchase_item.update(name: purchase_item.item.name)
+            if purchase_item.quantity == ""
+                purchase_item.quantity += additional_item.quantity
+            else
+                purchase_item.quantity += (", " + additional_item.quantity)
+            end
+            purchase_item.save
+        end
+        @purchase_items = @list.purchase_items.order(:name)
     end
 
     def destroy 

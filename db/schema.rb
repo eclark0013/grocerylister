@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 2020_01_27_215003) do
     t.string "name"
     t.string "quantity", default: ""
     t.integer "item_id"
+    t.integer "list_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

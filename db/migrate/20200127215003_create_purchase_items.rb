@@ -4,6 +4,7 @@ class CreatePurchaseItems < ActiveRecord::Migration[5.2]
       t.string :name
       t.string :quantity, default: ""
       t.integer :item_id
+      t.integer :list_id
 
       t.timestamps
     end

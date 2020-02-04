@@ -6,21 +6,21 @@ class PurchaseItem < ApplicationRecord
     # creates purchase items for each unique item and adds them
     # to said list
 
-    def name
-        if self.item
-            self.item.name
-        else
-            nil
-        end
-    end
+    # def name
+    #     if self.item
+    #         self.item.name
+    #     else
+    #         nil
+    #     end
+    # end
 
-    def name=(name)
-        if self.item
-            self.item.name=(name)
-            self.item.save
-        else
-            self.create_item(name: name)
-        end
-    end
+    # def name=(name)
+    #     if self.item
+    #         self.item.name=(name)
+    #         self.item.save
+    #     else
+    #         self.create_item(name: name)
+    #     end
+    # end
     
 end
