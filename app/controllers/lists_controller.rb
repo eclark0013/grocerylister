@@ -46,6 +46,12 @@ class ListsController < ApplicationController
         redirect_to user_list_path(current_user, list)
     end
 
+    def edit
+    end
+
+    def update
+    end
+
     private
     def list_params
         params.require(:list).permit(:name, recipes_ids:[], recipes_attributes: [:included, :id], additional_items_attributes: [:name, :quantity]).to_h
