@@ -1,31 +1,22 @@
-<h3><%= @list.name %></h3>
+<h3><%= @list.name %> by: <%= @user.name %></h3>
+<h4>Organized by category</h4>
 
-<% @list.list_recipes.each do |list_recipe| %>
-    <%= list_recipe.recipe.name %>
+<% GroceryCategory.all.each do |category| %>
+    <h5><%= category.name%></h5>
     <ul>
-    <% list_recipe.recipe.recipe_items.each do |recipe_item| %>
-        <li>
-            <%= recipe_item.name %>
-            (<%= recipe_item.quantity %>)
-            <br>Category: <%= recipe_item.item.grocery_category.name %>
-        </li>
-    <% end %>
+        <% @purchase_items.each do |purchase_item| %>
+            <% if purchase_item.item.grocery_category == category %>
+                <li>
+                    <%= purchase_item.item.name %>
+                    (<%= purchase_item.quantity %>)
+                </li>
+            <% end %>
+        <% end %>
     </ul>
 <% end %>
 
-Additional Items
-<ul>
-<% @list.additional_items.each do |additional_item| %>
-    <li>
-        <%= additional_item.name %>
-        (<%= additional_item.quantity %>)
-        <br>Category: <%= additional_item.item.grocery_category.name %>
-    </li>
-<% end %>
-</ul>
-
 <%= link_to "Edit list", edit_user_list_path(@user.id, @list) %><br>
 
-<%= link_to "Prepare list for print", prepare_user_list_path(@user.id, @list) %>
+<%= link_to "Edit item categories", edit_categories_user_list_path(@user.id, @list) %><br>
 
 

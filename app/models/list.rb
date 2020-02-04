@@ -18,6 +18,7 @@ class List < ApplicationRecord
 
     accepts_nested_attributes_for :recipes
     accepts_nested_attributes_for :additional_items
+    accepts_nested_attributes_for :purchase_items
 
     # def set_name (method that changes the name to the time it was updated in a readable format if it is left empty)
     # the view page should contain a note about how this is what it will do if it is left blank
