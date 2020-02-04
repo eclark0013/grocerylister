@@ -4,11 +4,12 @@
     Choose recipes to add to list below.<br><br>
     <% Recipe.all.each do |recipe| %>
         <%= f.fields_for :recipes, recipe do |recipes_fields| %>
-            <%= recipes_fields.check_box :included  %>
+            <%= recipes_fields.check_box :included, {checked: @list.recipes.include?(recipe)}  %>
             <%= recipes_fields.label :"#{recipe.name}" %>
         <% end %><br>
     <% end %>
     Add any individual items with quantities below.<br><br>
+  
     <% 20.times do %>
         <%= f.fields_for :additional_items, @list.additional_items.build do |additional_items_fields| %>
             <label> Item </label>

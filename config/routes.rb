@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :users, only: [:show] do
-    resources :lists, only: [:show, :new, :create, :edit, :update]
+    resources :lists, only: [:show, :new, :create, :edit, :update, :index]
   end
   resources :recipes
   resources :items, only: [:index]

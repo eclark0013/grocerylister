@@ -2,6 +2,7 @@ class ListsController < ApplicationController
     
     def show
         @list = List.find(params[:id])
+        @user = current_user 
     end
 
     def new
@@ -47,9 +48,12 @@ class ListsController < ApplicationController
     end
 
     def edit
+        @list = List.find(params[:id])
+        @user = current_user 
     end
 
     def update
+        raise params.inspect
     end
 
     private
