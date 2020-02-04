@@ -16,4 +16,12 @@ class Item < ApplicationRecord
 
     attr_accessor :quantity
 
+    def grocery_category_name
+        if self.grocery_category 
+            self.grocery_category.name
+        else
+            "No Category Given"
+        end
+    end
+
 end
