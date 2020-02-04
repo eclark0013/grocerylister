@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :recipes
   resources :items, only: [:index]
   resources :stores, only: [:index]
-  get '/users/:user_id/lists/:id/prepare' => 'lists#prepare'
+  get '/users/:user_id/lists/:id/prepare' => 'lists#prepare', as: "prepare_user_list"
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
   post '/logout' => 'sessions#destroy'

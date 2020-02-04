@@ -24,4 +24,8 @@ Additional Items
 <% end %>
 </ul>
 
-<%= link_to "Edit list", edit_user_list_path(@user.id, @list) %>
+<%= link_to "Edit list", edit_user_list_path(@user.id, @list) %><br>
+
+<%= link_to "Prepare list for print", prepare_user_list_path(@user.id, @list) %>
+
+

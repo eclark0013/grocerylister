@@ -1,12 +1,16 @@
-You made it to the preparation for:<br>
-List: <%= @list.name %><br>
-by:<br>
-User: <%= @user.name %>
-<ul>
-<% @purchase_items.each do |purchase_item| %>
-    <li>
-        <%= purchase_item.item.name %>
-        (<%= purchase_item.quantity %>)
-    </li>
+<h3><%= @list.name %> by: <%= @user.name %></h3>
+<h4>Organized by cateogry</h4>
+
+<% GroceryCategory.all.each do |category| %>
+    <h5><%= category.name%></h5>
+    <ul>
+        <% @purchase_items.each do |purchase_item| %>
+            <% if purchase_item.item.grocery_category == category %>
+                <li>
+                    <%= purchase_item.item.name %>
+                    (<%= purchase_item.quantity %>)
+                </li>
+            <% end %>
+        <% end %>
+    </ul>
 <% end %>
-</ul>
