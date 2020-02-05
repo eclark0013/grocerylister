@@ -1,4 +1,4 @@
-<h3><%= @list.name %> by: <%= @user.name %></h3>
+<h3><%= @list.name %> by: <%= @list.user.name %></h3>
 <h4>Organized by category</h4>
 
 <% GroceryCategory.all.each do |category| %>

@@ -1,7 +1,31 @@
-Welcome to your page <%= @user.name %><br>
+<h2><%= @user.name %>'s page</h2>
 
-<%= link_to "Recipes", recipes_path %><br>
+<% if @user.recipes.any? %>
+    <h3>Recipes:</h3>
+        <ul>
+            <% @user.recipes.each do |recipe| %>
+                <li>
+                    <%= link_to recipe.name, recipe_path(recipe) %> 
+                    by <%= link_to "you", user_path(current_user) %>
+                    (<%= link_to "Edit or delete recipe", edit_recipe_path(recipe) %>)<br>
+                </li>
+            <% end %>
+        </ul>
+<% end %>
 <%= link_to "Make New Recipe", new_recipe_path %><br>
-<%= link_to "Lists", user_lists_path(@user) %><br>
+<%= link_to "All Recipes", recipes_path %><br>
+
+<% if @user.lists.any? %>
+    <h3>Lists:</h3>
+        <ul>
+            <% @user.lists.each do |list| %>
+                <li>
+                    <%= link_to list.name, user_list_path(@user, list) %> 
+                    by <%= link_to "you", user_path(current_user) %>
+                    (<%= link_to "Edit list", edit_user_list_path(@user, list) %>)
+                </li>
+            <% end %>
+        </ul>
+<% end %>
 <%= link_to "Make New List", new_user_list_path(current_user) %>
 

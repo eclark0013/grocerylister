@@ -5,7 +5,7 @@
         <li>
             <%= link_to recipe.name, recipe_path(recipe) %> 
             by <%= link_to "you", user_path(current_user) %>
-            (<%= link_to "Edit recipe", edit_recipe_path(recipe) %>)<br>
+            (<%= link_to "Edit or delete recipe", edit_recipe_path(recipe) %>)<br>
         </li>
     <% end %>
 </ul>

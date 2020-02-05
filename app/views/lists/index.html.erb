@@ -9,12 +9,3 @@
             </li>
         <% end %>
 </ul>
-
-<h2>Public lists:</h2>
-<ul>
-    <% @public_lists.each do |list| %>
-        <li>
-            <%= link_to list.name, user_list_path(list.user, list) %> by <%= link_to list.user.name, user_path(list.user) %>
-        </li>
-    <% end %>
-</ul>
