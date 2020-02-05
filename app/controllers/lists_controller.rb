@@ -126,7 +126,16 @@ class ListsController < ApplicationController
     end
 
     def update_categories
-        raise params.inspect
+        @list = List.find(params[:id])
+        @user = current_user
+        @purchase_items = @list.purchase_items.order(:name)
+        list_params[:purchase_items_attributes].each do |purchase_items_attribute_array|
+            item = Item.find(purchase_items_attribute_array.last[:id].to_i)
+            grocery_category = GroceryCategory.find(purchase_items_attribute_array.last[:grocery_category_id].to_i)
+            item.grocery_category = grocery_category
+            item.save
+        end 
+        redirect_to user_list_path(@user, @list)
     end
 
     def destroy 
@@ -136,7 +145,7 @@ class ListsController < ApplicationController
 
     private
     def list_params
-        params.require(:list).permit(:name, recipes_ids:[], recipes_attributes: [:included, :id], additional_items_attributes: [:name, :quantity]).to_h
+        params.require(:list).permit(:name, recipes_ids:[], recipes_attributes: [:included, :id], additional_items_attributes: [:name, :quantity], purchase_items_ids:[], purchase_items_attributes: [:grocery_category_id, :id]).to_h
     end 
 
 end
