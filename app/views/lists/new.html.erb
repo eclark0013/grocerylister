@@ -1,14 +1,14 @@
 <%= form_with model: @list, url: user_lists_path(@user), local: true do |f| %>
     <%= f.label :name%>
     <%= f.text_field :name %><br><br>
-    Choose recipes to add to list below.<br><br>
+    Choose recipes to add to list below.<br>
     <% Recipe.all.each do |recipe| %>
         <%= f.fields_for :recipes, recipe do |recipes_fields| %>
             <%= recipes_fields.check_box :included  %>
-            <%= recipes_fields.label :"#{recipe.name}" %>
+            <%= recipes_fields.label :"#{recipe.name} by #{recipe.user.name}" %>
         <% end %><br>
-    <% end %>
-    Add any individual items with quantities below.<br><br>
+    <% end %><br>
+    Add any individual items with quantities below.<br>
     <% 20.times do %>
         <%= f.fields_for :additional_items, @list.additional_items.build do |additional_items_fields| %>
             <label> Item </label>

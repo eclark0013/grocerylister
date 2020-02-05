@@ -1,14 +1,17 @@
 <%= link_to "Add new recipe", new_recipe_path %>
-<h2>Your recipes:</h2>
-<ul>
-    <% @your_recipes.each do |recipe| %>
-        <li>
-            <%= link_to recipe.name, recipe_path(recipe) %> 
-            by <%= link_to "you", user_path(current_user) %>
-            (<%= link_to "Edit or delete recipe", edit_recipe_path(recipe) %>)<br>
-        </li>
-    <% end %>
-</ul>
+
+<% if current_user.recipes.any? %>
+    <h2>Your recipes:</h2>
+    <ul>
+        <% @your_recipes.each do |recipe| %>
+            <li>
+                <%= link_to recipe.name, recipe_path(recipe) %> 
+                by <%= link_to "you", user_path(current_user) %>
+                (<%= link_to "Edit or delete recipe", edit_recipe_path(recipe) %>)<br>
+            </li>
+        <% end %>
+    </ul>
+<% end %>
 
 <h2>Public recipes:</h2>
 <ul>
