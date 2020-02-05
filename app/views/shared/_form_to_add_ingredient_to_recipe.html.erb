@@ -1,5 +1,5 @@
 <li>
-    <%= f.fields_for :recipe_items, @recipe.recipe_items.build do |recipe_items_fields| %>
+    <%= f.fields_for :recipe_items, recipe_item do |recipe_items_fields| %>
         <label> Ingredient </label>
         <%= recipe_items_fields.text_field :name, list: "item names" %> 
         <datalist id="item names">

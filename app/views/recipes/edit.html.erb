@@ -2,39 +2,22 @@
 
 <%= form_with model: @recipe, local: true do |f| %>
     <%= f.label :name%>
-    <%= f.text_field :name, placeholder: "Chicken Parmesan" %><br><br>
-    Add ingredients with quantities below. Then add directions.<br>
-    
+    <%= f.text_field :name, placeholder: "Chicken Parmesan" %>
+    <br>
+    <br>
+    Add ingredients with quantities below. Then add directions.
+    <br>
     <% @recipe.recipe_items.each do |recipe_item| %>
-        <%= f.fields_for :recipe_items, recipe_item do |recipe_items_fields| %>
-            <label> Ingredient </label>
-            <%= recipe_items_fields.text_field :name, list: "item names" %> 
-            <datalist id="item names">
-                <% Item.pluck(:name).each do |name| %>
-                    <option value="<%= name %>">
-                <% end %>
-            </datalist>
-            <%= recipe_items_fields.label :quantity %>
-            <%= recipe_items_fields.text_field :quantity %><br>
-        <% end %> 
+        <%= render partial: "shared/form_to_add_ingredient_to_recipe", locals: {f: f, recipe_item: recipe_item} %>
     <% end %>
     <% 15.times do %>
-        <%= f.fields_for :recipe_items, @recipe.recipe_items.build do |recipe_items_fields| %>
-            <label> Ingredient </label>
-            <%= recipe_items_fields.text_field :name, list: "item names" %> 
-            <datalist id="item names">
-                <% Item.pluck(:name).each do |name| %>
-                    <option value="<%= name %>">
-                <% end %>
-            </datalist>
-            <%= recipe_items_fields.label :quantity %>
-            <%= recipe_items_fields.text_field :quantity %><br>
-        <% end %>
+        <%= render partial: "shared/form_to_add_ingredient_to_recipe", locals: {f: f, recipe_item: @recipe.recipe_items.build} %>
     <% end %>
     <br>
-
     <%= f.label :directions %>
-    <%= f.text_field :directions, size: 30 %><br><br>
+    <%= f.text_field :directions, size: 30 %>
+    <br>
+    <br>
     <%= f.submit %>
     
 <% end %>
