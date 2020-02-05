@@ -2,20 +2,23 @@
     <%= f.label :name%>
     <%= f.text_field :name, placeholder: "Chicken Parmesan" %><br><br>
     Add ingredients with quantities below. Then add directions.<br><br>
-    <% 20.times do %>
-        <%= f.fields_for :recipe_items, @recipe.recipe_items.build do |recipe_items_fields| %>
-            <label> Ingredient </label>
-            <%= recipe_items_fields.text_field :name, list: "item names" %> 
-            <datalist id="item names">
-                <% Item.pluck(:name).each do |name| %>
-                    <option value="<%= name %>">
+    <ul>
+        <% 20.times do %>
+            <li>
+                <%= f.fields_for :recipe_items, @recipe.recipe_items.build do |recipe_items_fields| %>
+                    <label> Ingredient </label>
+                    <%= recipe_items_fields.text_field :name, list: "item names" %> 
+                    <datalist id="item names">
+                        <% Item.pluck(:name).each do |name| %>
+                            <option value="<%= name %>">
+                        <% end %>
+                    </datalist>
+                    <%= recipe_items_fields.label :quantity %>
+                    <%= recipe_items_fields.text_field :quantity %><br>
                 <% end %>
-            </datalist>
-            <%= recipe_items_fields.label :quantity %>
-            <%= recipe_items_fields.text_field :quantity %><br>
+            </li><br>
         <% end %>
-        <br>
-    <% end %>
+    </ul>
     <br>
     <%= f.label :directions %>
     <%= f.text_field :directions, size: 30 %><br><br>
