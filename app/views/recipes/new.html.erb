@@ -4,7 +4,7 @@
     Add ingredients with quantities below. Then add directions.<br><br>
     <ul>
         <% 20.times do %>
-            <%= render partial: "shared/form_to_add_ingredient_to_recipe", locals: {f: f, recipe_item: @recipe.recipe_items.build} %>
+            <%= render partial: "shared/form_for_recipe_items", locals: {f: f, recipe_item: @recipe.recipe_items.build} %>
         <% end %>
     </ul>
     <br>

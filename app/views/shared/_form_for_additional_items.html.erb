@@ -1,0 +1,14 @@
+<li>
+    <%= f.fields_for :additional_items, additional_item do |additional_items_fields| %>
+        <label> Item </label>
+        <%= additional_items_fields.text_field :name, list: "item names" %> 
+        <datalist id="item names">
+            <% Item.pluck(:name).each do |name| %>
+                <option value="<%= name %>">
+            <% end %>
+        </datalist>
+        <%= additional_items_fields.label :quantity %>
+        <%= additional_items_fields.text_field :quantity %><br>
+    <% end %>
+</li>
+    <br>

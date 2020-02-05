@@ -9,23 +9,11 @@
         <% end %><br>
     <% end %><br>
     Add any individual items with quantities below.<br>
-    <% 20.times do %>
-        <%= f.fields_for :additional_items, @list.additional_items.build do |additional_items_fields| %>
-            <label> Item </label>
-            <%= additional_items_fields.text_field :name, list: "item names" %> 
-            <datalist id="item names">
-                <% Item.pluck(:name).each do |name| %>
-                    <option value="<%= name %>">
-                <% end %>
-            </datalist>
-            <%= additional_items_fields.label :quantity %>
-            <%= additional_items_fields.text_field :quantity %><br>
+    <ul>
+        <% 20.times do %>
+            <%= render partial: "shared/form_for_additional_items", locals: {f: f, additional_item: @list.additional_items.build} %>
         <% end %>
-        <br>
-    <% end %>
-
-
-
+    </ul>
     <%= f.submit %>
 <% end %>
 
