@@ -4,7 +4,6 @@ Rails.application.routes.draw do
   end
   resources :recipes
   resources :items, only: [:index]
-  resources :stores, only: [:index]
   get '/users/:user_id/lists/:id/edit_categories' => 'lists#edit_categories', as: "edit_categories_user_list"
   patch '/users/:user_id/lists/:id/categories' => 'lists#update_categories'
   put '/users/:user_id/lists/:id/categories' => 'lists#update_categories'

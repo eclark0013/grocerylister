@@ -17,9 +17,6 @@
     <% 15.times do %>
         <%= render partial: "shared/form_for_additional_items", locals: {f: f, additional_item: @list.additional_items.build} %>
     <% end %>
-
-
-
     <%= f.submit %>
 <% end %>
 <br><br>
