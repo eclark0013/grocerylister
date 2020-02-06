@@ -19,18 +19,18 @@
     <%= yield %>
 
     <br><br>
-    Footer:
-    <br><%= link_to "Recipes", recipes_path %>
-    
     <% if current_user %>
-      <br><%= link_to "Lists", user_lists_path(current_user) %>
-    <% end %>
-    
-    <% if session[:name] %>
-    <br>
-    <%= form_with url: "/logout", method: :post, local: true do |f| %>
-        <%= f.submit "Logout" %>
-      <% end %>
+    Footer:
+      <br>
+        <%= link_to "Recipes", recipes_path %>
+      <br>
+        <%= link_to "Lists", user_lists_path(current_user) %>
+      <br>
+        <%= link_to "Items", items_path %>
+      <br>
+        <%= form_with url: "/logout", method: :post, local: true do |f| %>
+          <%= f.submit "Logout" %>
+        <% end %>
     <% end %>
   </body>
   
