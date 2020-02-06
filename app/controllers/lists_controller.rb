@@ -81,12 +81,7 @@ class ListsController < ApplicationController
 
     def update
         @list = List.find(params[:id])
-        list_name = list_params[:name]
-        set_to_current_time(list_name)
-        @list.update(
-            name: list_name,
-            user_id: current_user.id
-            )
+        @list.set_name_and_user(current_user, list_params)
         @list.purchase_items.destroy_all
         ListRecipe.all.where(list_id: @list.id).destroy_all # clear out recipes to prepare for restocking
         # add_recipes_to_list
