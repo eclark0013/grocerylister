@@ -30,14 +30,8 @@ class ListsController < ApplicationController
     end
 
     def create
-        list_name = list_params[:name]
-        if list_name == ""
-            list_name = Time.now.strftime("List created %m/%d/%Y at %I:%M%p")
-        end
-        @list = List.create(
-            name: list_name,
-            user_id: current_user.id
-            )
+        @list = List.new
+        @list.set_name_and_user(current_user, list_params)
         @list.purchase_items.destroy_all
         # add_recipes_to_list and find or create purchase items
         list_params[:recipes_attributes].each do |recipe_attributes_array|
@@ -77,7 +71,7 @@ class ListsController < ApplicationController
                 purchase_item.save
             end
         end
-        redirect_to user_list_path(current_user, list)
+        redirect_to user_list_path(current_user, @list)
     end
 
     def edit
@@ -88,9 +82,7 @@ class ListsController < ApplicationController
     def update
         @list = List.find(params[:id])
         list_name = list_params[:name]
-        if list_name == ""
-            list_name = Time.now.strftime("List created %m/%d/%Y at %I:%M%p")
-        end
+        set_to_current_time(list_name)
         @list.update(
             name: list_name,
             user_id: current_user.id
