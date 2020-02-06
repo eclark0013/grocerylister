@@ -4,12 +4,9 @@ Rails.application.routes.draw do
   end
   resources :recipes
   resources :items, only: [:index]
-  get '/users/:user_id/lists/:id/edit_categories' => 'lists#edit_categories', as: "edit_categories_user_list"
-  patch '/users/:user_id/lists/:id/categories' => 'lists#update_categories'
-  put '/users/:user_id/lists/:id/categories' => 'lists#update_categories'
-  get '/users/:user_id/lists/:id/finalize' => 'lists#finalize', as: "finalize_user_list"
-  patch '/users/:user_id/lists/:id/finalize' => 'lists#final_update'
-  put '/users/:user_id/lists/:id/finalize' => 'lists#final_update'
+  get '/users/:user_id/lists/:id/edit_details' => 'lists#edit_details', as: "edit_details_user_list"
+  patch '/users/:user_id/lists/:id/details' => 'lists#update_details'
+  put '/users/:user_id/lists/:id/details' => 'lists#update_details'
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
   post '/logout' => 'sessions#destroy'

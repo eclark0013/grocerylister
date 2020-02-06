@@ -1,7 +1,7 @@
 <h3><%= @list.name %> by: <%= @user.name %></h3>
 <h4>Edit categories and quantities as desired. Unhcheck items to remove from list.</h4>
 
-<%= form_with model: @list, url: "/users/#{@user.id}/lists/#{@list.id}/finalize", local: true do |f| %>
+<%= form_with model: @list, url: "/users/#{@user.id}/lists/#{@list.id}/details", local: true do |f| %>
     <% GroceryCategory.all.each do |category| %>
         <h5><%= category.name%></h5>
         <ul>
@@ -23,7 +23,3 @@
     <% end %>
     <%= f.submit "submit" %>
 <% end %>
-
-<%= link_to "Edit list", edit_user_list_path(@user.id, @list) %><br>
-
-<%= link_to "Edit item categories", edit_categories_user_list_path(@user.id, @list) %><br>

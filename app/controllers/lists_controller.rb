@@ -14,7 +14,6 @@ class ListsController < ApplicationController
     def show
         @list = List.find(params[:id])
         @user = current_user
-        PurchaseItem.all.where(list_id: @list.id).destroy_all
         @purchase_items = @list.purchase_items.order(:name)
     end
 
@@ -35,27 +34,26 @@ class ListsController < ApplicationController
         if list_name == ""
             list_name = Time.now.strftime("List created %m/%d/%Y at %I:%M%p")
         end
-        list = List.create(
+        @list = List.create(
             name: list_name,
             user_id: current_user.id
             )
-        # add_recipes_to_list
+        # add_recipes_to_list and find or create purchase items
         list_params[:recipes_attributes].each do |recipe_attributes_array|
             recipe_attributes = recipe_attributes_array.last
             if recipe_attributes[:included] == "1"
-                list.list_recipes.build(recipe_id: recipe_attributes[:id].to_i).save
-            end
-        end
-        @list.recipes.each do |recipe| # find or create purchase items for each recipe item and update its quantity
-            recipe.recipe_items.each do |recipe_item|
-                purchase_item = PurchaseItem.find_or_create_by(item_id: recipe_item.item.id, list_id: @list.id)
-                purchase_item.update(name: purchase_item.item.name)
-                if purchase_item.quantity == ""
-                    purchase_item.quantity += recipe_item.quantity
-                else
-                    purchase_item.quantity += (", " + recipe_item.quantity)
+                list_recipe = @list.list_recipes.build(recipe_id: recipe_attributes[:id].to_i)
+                list_recipe.save
+                list_recipe.recipe.recipe_items.each do |recipe_item|
+                    purchase_item = PurchaseItem.find_or_create_by(item_id: recipe_item.item.id, list_id: @list.id)
+                    purchase_item.update(name: purchase_item.item.name)
+                    if purchase_item.quantity == ""
+                        purchase_item.quantity += recipe_item.quantity
+                    else
+                        purchase_item.quantity += (", " + recipe_item.quantity)
+                    end
+                    purchase_item.save
                 end
-                purchase_item.save
             end
         end
         # add_additional_items_to_list
@@ -63,22 +61,20 @@ class ListsController < ApplicationController
             additional_item_attributes = additional_items_array.last
             name = additional_item_attributes[:name]
             if name != ""
-                list.additional_items.build(
+                additional_item = @list.additional_items.build(
                     item_id: Item.find_or_create_by(name: name).id,
                     quantity: additional_item_attributes[:quantity]
-                    ).save
+                    )
+                additional_item.save
+                purchase_item = PurchaseItem.find_or_create_by(item_id: additional_item.item.id, list_id: @list.id)
+                purchase_item.update(name: purchase_item.item.name)
+                if purchase_item.quantity == ""
+                    purchase_item.quantity += additional_item.quantity
+                else
+                    purchase_item.quantity += (", " + additional_item.quantity)
+                end
+                purchase_item.save
             end
-        end
-        # find or create purchase items for each additional item and update its quantity
-        @list.additional_items.each do |additional_item|
-            purchase_item = PurchaseItem.find_or_create_by(item_id: additional_item.item.id, list_id: @list.id)
-            purchase_item.update(name: purchase_item.item.name)
-            if purchase_item.quantity == ""
-                purchase_item.quantity += additional_item.quantity
-            else
-                purchase_item.quantity += (", " + additional_item.quantity)
-            end
-            purchase_item.save
         end
         redirect_to user_list_path(current_user, list)
     end
@@ -103,7 +99,18 @@ class ListsController < ApplicationController
         list_params[:recipes_attributes].each do |recipe_attributes_array|
             recipe_attributes = recipe_attributes_array.last
             if recipe_attributes[:included] == "1"
-                @list.list_recipes.build(recipe_id: recipe_attributes[:id].to_i).save
+                list_recipe = @list.list_recipes.build(recipe_id: recipe_attributes[:id].to_i)
+                list_recipe.save
+                list_recipe.recipe.recipe_items.each do |recipe_item|
+                    purchase_item = PurchaseItem.find_or_create_by(item_id: recipe_item.item.id, list_id: @list.id)
+                    purchase_item.update(name: purchase_item.item.name)
+                    if purchase_item.quantity == ""
+                        purchase_item.quantity += recipe_item.quantity
+                    else
+                        purchase_item.quantity += (", " + recipe_item.quantity)
+                    end
+                    purchase_item.save
+                end
             end
         end
         AdditionalItem.all.where(list_id: @list.id).destroy_all # clear out additional items to prepare for restocking
@@ -121,32 +128,13 @@ class ListsController < ApplicationController
         redirect_to user_list_path(current_user, @list)
     end
 
-    def edit_categories
+    def edit_details #allow user to edit category, quantity, and remove items from list based on kitchen inventory
         @list = List.find(params[:id])
         @user = current_user
         @purchase_items = @list.purchase_items.order(:name)
     end
 
-    def update_categories
-        @list = List.find(params[:id])
-        @user = current_user
-        @purchase_items = @list.purchase_items.order(:name)
-        list_params[:purchase_items_attributes].each do |purchase_items_attribute_array|
-            item = Item.find(purchase_items_attribute_array.last[:id].to_i)
-            grocery_category = GroceryCategory.find(purchase_items_attribute_array.last[:grocery_category_id].to_i)
-            item.grocery_category = grocery_category
-            item.save
-        end 
-        redirect_to user_list_path(@user, @list)
-    end
-
-    def finalize #allow user to edit category, quantity, and remove items from list based on kitchen inventory
-        @list = List.find(params[:id])
-        @user = current_user
-        @purchase_items = @list.purchase_items.order(:name)
-    end
-
-    def final_update
+    def update_details
         @list = List.find(params[:id])
         @user = current_user
         @purchase_items = @list.purchase_items.order(:name)
@@ -164,7 +152,6 @@ class ListsController < ApplicationController
                 item.save
             end 
         end
-
         redirect_to user_list_path(@user, @list)
     end
 

@@ -15,10 +15,8 @@
     </ul>
 <% end %>
 
-<%= link_to "Edit list", edit_user_list_path(@user.id, @list) %><br>
+<%= link_to "Edit List", edit_user_list_path(@user.id, @list) %><br>
 
-<%= link_to "Edit item categories", edit_categories_user_list_path(@user.id, @list) %><br>
-
-<%= link_to "Finalize List", finalize_user_list_path(@user.id, @list) %><br>
+<%= link_to "Edit Details to Finalize", edit_details_user_list_path(@user.id, @list) %><br>
 
 
