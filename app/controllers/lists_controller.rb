@@ -38,6 +38,7 @@ class ListsController < ApplicationController
             name: list_name,
             user_id: current_user.id
             )
+        @list.purchase_items.destroy_all
         # add_recipes_to_list and find or create purchase items
         list_params[:recipes_attributes].each do |recipe_attributes_array|
             recipe_attributes = recipe_attributes_array.last
@@ -94,6 +95,7 @@ class ListsController < ApplicationController
             name: list_name,
             user_id: current_user.id
             )
+        @list.purchase_items.destroy_all
         ListRecipe.all.where(list_id: @list.id).destroy_all # clear out recipes to prepare for restocking
         # add_recipes_to_list
         list_params[:recipes_attributes].each do |recipe_attributes_array|
