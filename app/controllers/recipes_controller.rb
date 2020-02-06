@@ -1,4 +1,6 @@
 class RecipesController < ApplicationController
+    before_action :require_login
+    
     def index
         if current_user
             @your_recipes = Recipe.where(user_id: current_user.id)

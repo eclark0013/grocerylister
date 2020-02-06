@@ -6,4 +6,10 @@ class ApplicationController < ActionController::Base
             nil
         end
     end
+
+    def require_login
+        if !session[:name]
+            redirect_to "/login"
+        end
+    end
 end

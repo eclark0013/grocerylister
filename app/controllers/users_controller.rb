@@ -1,17 +1,23 @@
 class UsersController < ApplicationController
     def show
-        if params[:id]
-            @user = User.find(params[:id])
-        else
-            @user = current_user
+        require_login
+        @user = User.find_by(id: params[:id])
+        if @user == nil
+            redirect_to root_path
         end
     end
 
-    def new
+    def home #root path
+        require_login
+        @user = current_user
+        render "show"
+    end
+
+    def new #sign up page
         @user = User.new
     end
 
-    def create
+    def create #make a new user
         @user = User.create(user_params)
         session[:name] = @user.name
         redirect_to user_path(@user)

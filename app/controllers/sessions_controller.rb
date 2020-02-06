@@ -1,14 +1,14 @@
 class SessionsController < ApplicationController
     
-    def new   
+    def new #login page
         if session[:name]
             redirect_to user_path(User.find_by(name: session[:name]))
         end
     end
 
-    def create
-        @user = User.find_by(name: params[:user][:name])
-        if @user && @user.authenticate(params[:user][:password])
+    def create #login a user
+        @user = User.find_by(name: user_params[:name])
+        if @user && @user.authenticate(user_params[:password])
            session[:name] = @user.name
            redirect_to user_path(@user)
         else 
@@ -21,8 +21,8 @@ class SessionsController < ApplicationController
         redirect_to action: "new"
     end
 
-    # private
-    # def user_params
-    #     params.require(:user).permit(:name, :password)
-    # end
+    private
+    def user_params
+        params.require(:user).permit(:name, :password)
+    end
 end
