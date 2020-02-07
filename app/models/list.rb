@@ -1,5 +1,6 @@
 class List < ApplicationRecord 
     validates :name, presence: true
+    validates :purchase_items, :length => { :minimum => 1 }
 
     has_many :additional_items
     # has_many :items, through: :additional_items
