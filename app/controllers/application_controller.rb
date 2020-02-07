@@ -18,4 +18,5 @@ class ApplicationController < ActionController::Base
             list_name = Time.now.strftime("List created %m/%d/%Y at %I:%M%p")
         end
     end
+
 end

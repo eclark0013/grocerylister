@@ -25,7 +25,16 @@ class RecipesController < ApplicationController
             directions: recipe_params[:directions]
             )
         @recipe.add_items(recipe_params)
-        redirect_to recipe_path(@recipe)
+        if @recipe.errors.any?
+            if @recipe.errors[:name].any?
+                flash[:error_messages] = @recipe.errors.full_messages_for(:name)
+            else
+                flash[:error_messages] = @recipe.errors.full_messages
+            end
+            render "recipes/new"
+        else
+            redirect_to recipe_path(@recipe)
+        end
     end
 
     def edit
@@ -35,7 +44,16 @@ class RecipesController < ApplicationController
     def update
         @recipe = Recipe.find(params[:id])
         @recipe.update_recipe(recipe_params)
-        redirect_to recipe_path(@recipe)
+        if @recipe.errors.any?
+            if @recipe.errors[:name].any?
+                flash[:error_messages] = @recipe.errors.full_messages_for(:name)
+            else
+                flash[:error_messages] = @recipe.errors.full_messages
+            end
+            redirect_to edit_recipe_path(@recipe)
+        else
+            redirect_to recipe_path(@recipe)
+        end
     end
 
     def destroy 

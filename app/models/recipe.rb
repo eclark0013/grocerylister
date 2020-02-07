@@ -1,6 +1,6 @@
 class Recipe < ApplicationRecord
     validates :name, presence: true
-    validates :recipe_items, :length => { :minimum => 1 }
+    validates :items, :length => {:minimum => 1, :message => "must be present in recipe."}
     
     has_many :recipe_items 
     has_many :items, through: :recipe_items

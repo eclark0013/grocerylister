@@ -31,3 +31,8 @@
 
 en:
   hello: "Hello world"
+  activerecord:
+    errors:
+      models:
+        recipe:
+          format: "%{message} %{attribute}"
