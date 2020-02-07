@@ -10,13 +10,15 @@
             <%= recipes_fields.label :"#{recipe.name}" %>
         <% end %><br>
     <% end %>
-    Add any individual items with quantities below.<br><br>
-    <% @list.additional_items.each do |additional_item| %>
-        <%= render partial: "shared/form_for_additional_items", locals: {f: f, additional_item: additional_item} %>
-    <% end %>
-    <% 15.times do %>
-        <%= render partial: "shared/form_for_additional_items", locals: {f: f, additional_item: @list.additional_items.build} %>
-    <% end %>
+    Add any individual items with quantities below.<br>
+    <ul>
+        <% @list.additional_items.each do |additional_item| %>
+            <%= render partial: "shared/form_for_additional_items", locals: {f: f, additional_item: additional_item} %>
+        <% end %>
+        <% 15.times do %>
+            <%= render partial: "shared/form_for_additional_items", locals: {f: f, additional_item: @list.additional_items.build} %>
+        <% end %>
+    </ul>
     <%= f.submit %>
 <% end %>
 <br><br>
