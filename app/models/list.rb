@@ -9,7 +9,7 @@ class List < ApplicationRecord
     has_many :recipe_items, through: :recipes
     # has_many :items, through: :recipe_items
 
-    has_many :list_items
+    has_many :additional_items
 
     has_many :purchase_items
     has_many :items, through: :purchase_items
@@ -30,5 +30,53 @@ class List < ApplicationRecord
             user_id: current_user.id
             )
     end
-    # the view page should contain a note about how this is what it will do if it is left blank
+
+    def add_recipes(list_params)
+        list_params[:recipes_attributes].each do |recipe_attributes_array|
+            recipe_attributes = recipe_attributes_array.last
+            if recipe_attributes[:included] == "1"
+                list_recipe = self.list_recipes.build(recipe_id: recipe_attributes[:id].to_i)
+                list_recipe.save
+                list_recipe.recipe.recipe_items.each do |recipe_item|
+                    purchase_item = PurchaseItem.find_or_create_by(item_id: recipe_item.item.id, list_id: self.id)
+                    purchase_item.update(name: purchase_item.item.name)
+                    if purchase_item.quantity == ""
+                        purchase_item.quantity += recipe_item.quantity
+                    else
+                        purchase_item.quantity += (", " + recipe_item.quantity)
+                    end
+                    purchase_item.save
+                end
+            end
+        end
+    end
+
+    def add_additional_items(list_params)
+        list_params[:additional_items_attributes].each do |additional_items_array|
+            additional_item_attributes = additional_items_array.last
+            name = additional_item_attributes[:name]
+            if name != ""
+                additional_item = self.additional_items.build(
+                    item_id: Item.find_or_create_by(name: name).id,
+                    quantity: additional_item_attributes[:quantity]
+                    )
+                additional_item.save
+                purchase_item = PurchaseItem.find_or_create_by(item_id: additional_item.item.id, list_id: self.id)
+                purchase_item.update(name: purchase_item.item.name)
+                if purchase_item.quantity == ""
+                    purchase_item.quantity += additional_item.quantity
+                else
+                    purchase_item.quantity += (", " + additional_item.quantity)
+                end
+                purchase_item.save
+            end
+        end
+    end
+
+    def clear_items_from_list
+        self.purchase_items.destroy_all
+        self.list_recipes.destroy_all
+        self.additional_items.destroy_all
+    end
+
 end

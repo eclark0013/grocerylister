@@ -32,45 +32,8 @@ class ListsController < ApplicationController
     def create
         @list = List.new
         @list.set_name_and_user(current_user, list_params)
-        @list.purchase_items.destroy_all
-        # add_recipes_to_list and find or create purchase items
-        list_params[:recipes_attributes].each do |recipe_attributes_array|
-            recipe_attributes = recipe_attributes_array.last
-            if recipe_attributes[:included] == "1"
-                list_recipe = @list.list_recipes.build(recipe_id: recipe_attributes[:id].to_i)
-                list_recipe.save
-                list_recipe.recipe.recipe_items.each do |recipe_item|
-                    purchase_item = PurchaseItem.find_or_create_by(item_id: recipe_item.item.id, list_id: @list.id)
-                    purchase_item.update(name: purchase_item.item.name)
-                    if purchase_item.quantity == ""
-                        purchase_item.quantity += recipe_item.quantity
-                    else
-                        purchase_item.quantity += (", " + recipe_item.quantity)
-                    end
-                    purchase_item.save
-                end
-            end
-        end
-        # add_additional_items_to_list
-        list_params[:additional_items_attributes].each do |additional_items_array|
-            additional_item_attributes = additional_items_array.last
-            name = additional_item_attributes[:name]
-            if name != ""
-                additional_item = @list.additional_items.build(
-                    item_id: Item.find_or_create_by(name: name).id,
-                    quantity: additional_item_attributes[:quantity]
-                    )
-                additional_item.save
-                purchase_item = PurchaseItem.find_or_create_by(item_id: additional_item.item.id, list_id: @list.id)
-                purchase_item.update(name: purchase_item.item.name)
-                if purchase_item.quantity == ""
-                    purchase_item.quantity += additional_item.quantity
-                else
-                    purchase_item.quantity += (", " + additional_item.quantity)
-                end
-                purchase_item.save
-            end
-        end
+        @list.add_recipes(list_params)
+        @list.add_additional_items(list_params)
         redirect_to user_list_path(current_user, @list)
     end
 
@@ -82,38 +45,9 @@ class ListsController < ApplicationController
     def update
         @list = List.find(params[:id])
         @list.set_name_and_user(current_user, list_params)
-        @list.purchase_items.destroy_all
-        ListRecipe.all.where(list_id: @list.id).destroy_all # clear out recipes to prepare for restocking
-        # add_recipes_to_list
-        list_params[:recipes_attributes].each do |recipe_attributes_array|
-            recipe_attributes = recipe_attributes_array.last
-            if recipe_attributes[:included] == "1"
-                list_recipe = @list.list_recipes.build(recipe_id: recipe_attributes[:id].to_i)
-                list_recipe.save
-                list_recipe.recipe.recipe_items.each do |recipe_item|
-                    purchase_item = PurchaseItem.find_or_create_by(item_id: recipe_item.item.id, list_id: @list.id)
-                    purchase_item.update(name: purchase_item.item.name)
-                    if purchase_item.quantity == ""
-                        purchase_item.quantity += recipe_item.quantity
-                    else
-                        purchase_item.quantity += (", " + recipe_item.quantity)
-                    end
-                    purchase_item.save
-                end
-            end
-        end
-        AdditionalItem.all.where(list_id: @list.id).destroy_all # clear out additional items to prepare for restocking
-        # add_additional_items_to_list
-        list_params[:additional_items_attributes].each do |additional_items_array|
-            additional_item_attributes = additional_items_array.last
-            name = additional_item_attributes[:name]
-            if name != ""
-                @list.additional_items.build(
-                    item_id: Item.find_or_create_by(name: name).id,
-                    quantity: additional_item_attributes[:quantity]
-                    ).save
-            end
-        end
+        @list.clear_items_from_list
+        @list.add_recipes(list_params)
+        @list.add_additional_items(list_params)
         redirect_to user_list_path(current_user, @list)
     end
 
