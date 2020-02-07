@@ -73,6 +73,23 @@ class List < ApplicationRecord
         end
     end
 
+    def update_details(list_params)
+        list_params[:purchase_items_attributes].each do |purchase_items_attribute_array|
+            purchase_items_attributes = purchase_items_attribute_array.last
+            purchase_item = PurchaseItem.find(purchase_items_attributes[:id].to_i)
+            if purchase_items_attributes[:included] == "0"
+                purchase_item.destroy
+            else
+                item = purchase_item.item
+                purchase_item.quantity = purchase_items_attributes[:quantity]
+                purchase_item.save
+                grocery_category = GroceryCategory.find(purchase_items_attribute_array.last[:grocery_category_id].to_i)
+                item.grocery_category = grocery_category
+                item.save
+            end 
+        end
+    end
+
     def clear_items_from_list
         self.purchase_items.destroy_all
         self.list_recipes.destroy_all

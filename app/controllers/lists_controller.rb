@@ -24,9 +24,6 @@ class ListsController < ApplicationController
             @user = current_user
             @list = List.new
         end
-        # set up to add a recipe but with option to unselect items as desired
-        # maybe like a "do you want all of this?" page where you can unselect
-        # items before it is made into a real list
     end
 
     def create
@@ -61,20 +58,7 @@ class ListsController < ApplicationController
         @list = List.find(params[:id])
         @user = current_user
         @purchase_items = @list.purchase_items.order(:name)
-        list_params[:purchase_items_attributes].each do |purchase_items_attribute_array|
-            purchase_items_attributes = purchase_items_attribute_array.last
-            purchase_item = PurchaseItem.find(purchase_items_attributes[:id].to_i)
-            if purchase_items_attributes[:included] == "0"
-                purchase_item.destroy
-            else
-                item = purchase_item.item
-                purchase_item.quantity = purchase_items_attributes[:quantity]
-                purchase_item.save
-                grocery_category = GroceryCategory.find(purchase_items_attribute_array.last[:grocery_category_id].to_i)
-                item.grocery_category = grocery_category
-                item.save
-            end 
-        end
+        @list.update_details(list_params)
         redirect_to user_list_path(@user, @list)
     end
 
