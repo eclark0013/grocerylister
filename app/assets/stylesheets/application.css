@@ -13,3 +13,12 @@
  *= require_tree .
  *= require_self
  */
+
+ .errors li, .errors h4 {
+    color: red;
+    font-weight: bold;
+}
+
+body {
+    margin: 22px;
+}
