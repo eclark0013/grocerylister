@@ -31,7 +31,7 @@ class ListsController < ApplicationController
         @list.set_name_and_user(current_user, list_params)
         @list.add_recipes(list_params)
         @list.add_additional_items(list_params)
-        redirect_to user_list_path(current_user, @list)
+        redirect_to user_list_path(current_user, @list) 
     end
 
     def edit
@@ -45,6 +45,7 @@ class ListsController < ApplicationController
         @list.clear_items_from_list
         @list.add_recipes(list_params)
         @list.add_additional_items(list_params)
+        @list.save
         redirect_to user_list_path(current_user, @list)
     end
 
