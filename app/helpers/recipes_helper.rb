@@ -1,7 +1,7 @@
 module RecipesHelper
     def current_user
-        if session[:name]
-            User.find_by(name: session[:name])
+        if session[:user_id]
+            User.find(session[:user_id])
         else
             nil
         end

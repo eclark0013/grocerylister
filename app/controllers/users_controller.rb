@@ -8,9 +8,11 @@ class UsersController < ApplicationController
     end
 
     def home #root path
-        require_login
-        @user = current_user
-        render "show"
+        if require_login
+        else
+            @user = current_user
+            render "show"
+        end
     end
 
     def new #sign up page
@@ -19,7 +21,7 @@ class UsersController < ApplicationController
 
     def create #make a new user
         @user = User.create(user_params)
-        session[:name] = @user.name
+        session[:user_id] = @user.id
         redirect_to user_path(@user)
     end
 

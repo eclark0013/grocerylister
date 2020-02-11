@@ -1,14 +1,14 @@
 class ApplicationController < ActionController::Base
     def current_user
-        if session[:name]
-            User.find_by(name: session[:name])
+        if session[:user_id]
+            User.find(session[:user_id])
         else
             nil
         end
     end
 
     def require_login
-        if !session[:name]
+        if !session[:user_id]
             redirect_to "/login"
         end
     end

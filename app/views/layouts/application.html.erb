@@ -7,7 +7,7 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <% if session[:name] %>
+    <% if session[:user_id] %>
       <%= link_to "Home", root_path %>
     <% else %> 
       <%= link_to "Sign In", '/login' %>

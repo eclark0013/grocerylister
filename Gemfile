@@ -20,6 +20,7 @@ gem 'rails-pry'
 gem 'database_cleaner-active_record'
 gem 'omniauth'
 gem 'omniauth-facebook'
+gem 'dotenv-rails'
 
 
 
