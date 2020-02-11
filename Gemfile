@@ -18,6 +18,8 @@ gem 'uglifier', '>= 1.3.0'
 gem 'pry'
 gem 'rails-pry'
 gem 'database_cleaner-active_record'
+gem 'omniauth'
+gem 'omniauth-facebook'
 
 
 
