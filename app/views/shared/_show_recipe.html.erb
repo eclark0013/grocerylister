@@ -1,0 +1,15 @@
+<h3>Ingredients:</h3>
+<ul>
+<% @recipe.items.each do |ingredient| %>
+    <li>
+        <%= ingredient.name %> 
+        (<%= RecipeItem.find_by(recipe_id: @recipe.id, item_id: ingredient.id).quantity %>)
+    </li>
+<% end %>
+</ul>
+<h3>Directions:</h3>
+<%= @recipe.directions %>
+<% if @recipe.user == current_user %>
+    <br><br><%= link_to "Edit recipe", edit_recipe_path(@recipe) %>
+<% end %>
+

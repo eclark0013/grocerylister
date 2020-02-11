@@ -1,3 +1,5 @@
 <h2><%= "#{@recipe.name} by #{@recipe.user.name}" %><br></h2>
 
+<p> <%= "#{@recipe.name} is the most popular recipe, currently a part of #{pluralize(@recipe.popularity, 'list')}!" %> </p>
+
 <%= render "shared/show_recipe", partials: {recipe: @recipe} %>
