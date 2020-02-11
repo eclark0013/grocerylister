@@ -90,9 +90,10 @@ r3 = Recipe.create(name: "PB & J", user: u2, directions: "Put together the peanu
     l1.add_additional_item("ritz crackers", "2 boxes")
     l1.add_additional_item("peanut butter", "1 container")
     l1.add_additional_item("brie", "1/4 pound")
+    l1.add_additional_item("potatoes", "20")
 
 # make a list 2
-l2 = List.create(user: u1, name: "Another list")
+l2 = List.create(user: u2, name: "Another list")
 
 # add recipes to l1
     l2.add_recipe(r2)
