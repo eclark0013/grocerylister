@@ -35,18 +35,6 @@ class List < ApplicationRecord
             if recipe_attributes[:included] == "1"
                 recipe = Recipe.find(recipe_attributes[:id].to_i)
                 add_recipe(recipe)
-                # list_recipe = self.list_recipes.build(recipe_id: recipe.id)
-                # list_recipe.save
-                # list_recipe.recipe.recipe_items.each do |recipe_item|
-                #     purchase_item = PurchaseItem.find_or_create_by(item_id: recipe_item.item.id, list_id: self.id)
-                #     purchase_item.update(name: purchase_item.item.name)
-                #     if purchase_item.quantity == ""
-                #         purchase_item.quantity += recipe_item.quantity
-                #     else
-                #         purchase_item.quantity += (", " + recipe_item.quantity)
-                #     end
-                #     purchase_item.save
-                # end
             end
         end
     end
@@ -71,22 +59,28 @@ class List < ApplicationRecord
             additional_item_attributes = additional_items_array.last
             name = additional_item_attributes[:name]
             if name != ""
-                additional_item = self.additional_items.build(
-                    item_id: Item.find_or_create_by(name: name).id,
-                    quantity: additional_item_attributes[:quantity]
-                    )
-                additional_item.save
-                purchase_item = PurchaseItem.find_or_create_by(item_id: additional_item.item.id, list_id: self.id)
-                purchase_item.update(name: purchase_item.item.name)
-                if purchase_item.quantity == ""
-                    purchase_item.quantity += additional_item.quantity
-                else
-                    purchase_item.quantity += (", " + additional_item.quantity)
-                end
-                purchase_item.save
+                quantity = additional_item_attributes[:quantity]
+                add_additional_item(name, quantity)
             end
         end
     end
+
+    def add_additional_item(name, quantity)
+        additional_item = self.additional_items.build(
+            item_id: Item.find_or_create_by(name: name).id,
+            quantity: quantity
+            )
+        additional_item.save
+        purchase_item = PurchaseItem.find_or_create_by(item_id: additional_item.item.id, list_id: self.id)
+        purchase_item.update(name: purchase_item.item.name)
+        if purchase_item.quantity == ""
+            purchase_item.quantity += additional_item.quantity
+        else
+            purchase_item.quantity += (", " + additional_item.quantity)
+        end
+        purchase_item.save
+    end
+
 
     def update_details(list_params)
         list_params[:purchase_items_attributes].each do |purchase_items_attribute_array|
