@@ -11,7 +11,8 @@ class RecipesController < ApplicationController
     end
 
     def most_popular
-        Recipe.most_popular
+        @recipe = Recipe.most_popular
+        render "show"
     end
 
     def show
