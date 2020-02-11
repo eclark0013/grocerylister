@@ -33,19 +33,36 @@ class List < ApplicationRecord
         list_params[:recipes_attributes].each do |recipe_attributes_array|
             recipe_attributes = recipe_attributes_array.last
             if recipe_attributes[:included] == "1"
-                list_recipe = self.list_recipes.build(recipe_id: recipe_attributes[:id].to_i)
-                list_recipe.save
-                list_recipe.recipe.recipe_items.each do |recipe_item|
-                    purchase_item = PurchaseItem.find_or_create_by(item_id: recipe_item.item.id, list_id: self.id)
-                    purchase_item.update(name: purchase_item.item.name)
-                    if purchase_item.quantity == ""
-                        purchase_item.quantity += recipe_item.quantity
-                    else
-                        purchase_item.quantity += (", " + recipe_item.quantity)
-                    end
-                    purchase_item.save
-                end
+                recipe = Recipe.find(recipe_attributes[:id].to_i)
+                add_recipe(recipe)
+                # list_recipe = self.list_recipes.build(recipe_id: recipe.id)
+                # list_recipe.save
+                # list_recipe.recipe.recipe_items.each do |recipe_item|
+                #     purchase_item = PurchaseItem.find_or_create_by(item_id: recipe_item.item.id, list_id: self.id)
+                #     purchase_item.update(name: purchase_item.item.name)
+                #     if purchase_item.quantity == ""
+                #         purchase_item.quantity += recipe_item.quantity
+                #     else
+                #         purchase_item.quantity += (", " + recipe_item.quantity)
+                #     end
+                #     purchase_item.save
+                # end
             end
+        end
+    end
+
+    def add_recipe(recipe)
+        list_recipe = self.list_recipes.build(recipe_id: recipe.id)
+        list_recipe.save
+        list_recipe.recipe.recipe_items.each do |recipe_item|
+            purchase_item = PurchaseItem.find_or_create_by(item_id: recipe_item.item.id, list_id: self.id)
+            purchase_item.update(name: purchase_item.item.name)
+            if purchase_item.quantity == ""
+                purchase_item.quantity += recipe_item.quantity
+            else
+                purchase_item.quantity += (", " + recipe_item.quantity)
+            end
+            purchase_item.save
         end
     end
 

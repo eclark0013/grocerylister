@@ -15,7 +15,7 @@ Specs:
 - [x] Include third party signup/login (how e.g. Devise/OmniAuth) <!--- users can login with facebook from the login or new user page ---> 
 - [x] Include nested resource show or index (URL e.g. users/2/recipes) <!--- lists are nested under users ---> 
 - [x] Include nested resource "new" form (URL e.g. recipes/1/ingredients/new) <!--- lists has a new form ---> 
-- [x] Include form display of validation errors (form URL e.g. /recipes/new) <!--- lists and recipe display errors ---> 
+- [x] Include form display of validation errors (form URL e.g. /recipes/new) <!--- new lists, recipes, and user login display errors ---> 
 
 Confirm:
 - [ ] The application is pretty DRY

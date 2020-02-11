@@ -13,5 +13,4 @@ class Item < ApplicationRecord
 
     attr_accessor :quantity
 
-
 end

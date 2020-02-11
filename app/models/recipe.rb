@@ -13,8 +13,7 @@ class Recipe < ApplicationRecord
 
     accepts_nested_attributes_for :recipe_items
 
-    def included
-    end
+    attr_reader :included
 
     def self.most_popular
         self.order(popularity: :desc).first

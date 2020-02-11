@@ -2,6 +2,8 @@ class PurchaseItem < ApplicationRecord
     belongs_to :list
     belongs_to :item
 
+    attr_reader :included
+    
     def grocery_category
         self.item.grocery_category
     end
@@ -10,7 +12,6 @@ class PurchaseItem < ApplicationRecord
         self.item.grocery_category_id
     end
 
-    def included
-    end
+    
     
 end

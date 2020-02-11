@@ -77,3 +77,13 @@ r3 = Recipe.create(name: "PB & J", user: u2, directions: "Put together the peanu
     RecipeItem.create(recipe_id: r3.id, item_id: Item.find_or_create_by(name: "bread").id, quantity: "2 slices")
 
 l1 = List.create(user: u1, name: "The best grocery trip ever")
+
+# add recipes to l1
+    ListRecipe.create(recipe_id: r1.id, list_id: l1.id)
+    ListRecipe.create(recipe_id: r3.id, list_id: l1.id)
+
+# add additional items to l1
+    AdditionalItem.create(list_id: l1.id, item_id: Item.find_or_create_by(name: "oranges").id, quantity: "2")
+    AdditionalItem.create(list_id: l1.id, item_id: Item.find_or_create_by(name: "milk").id, quantity: "3 cups")
+    AdditionalItem.create(list_id: l1.id, item_id: Item.find_or_create_by(name: "kraft mac and cheese").id, quantity: "1 box")
+    AdditionalItem.create(list_id: l1.id, item_id: Item.find_or_create_by(name: "apples").id, quantity: "1 bag")

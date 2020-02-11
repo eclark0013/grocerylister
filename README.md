@@ -1,24 +1,11 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This project has been made using rails 6.0.0 as part of my training through the Flatiron Software Enginnering Program.
 
-Things you may want to cover:
+Grocerylister is a rails webapp that allows a user to make recipes and add those recipes to grocery lists along with other indivudal items.
 
-* Ruby version
+Lists are categorized by grocery category (e.g. frozen, dairy, meats & cheeses, etc.).
 
-* System dependencies
+To see how the app works, clone down the repo, run $ rails db:seed and start a sesrver using $ rails s.
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Access the app using http://localhost:3000/ and enjoy.
