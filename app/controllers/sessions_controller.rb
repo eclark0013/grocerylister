@@ -7,11 +7,16 @@ class SessionsController < ApplicationController
     end
 
     def create #login a user
-        @user = User.find_by(name: user_params[:name])
-        if @user && @user.authenticate(user_params[:password])
-           session[:user_id] = @user.id
-           redirect_to user_path(@user)
-        else 
+        if @user = User.find_by(name: user_params[:name])
+            if @user.authenticate(user_params[:password])
+                session[:user_id] = @user.id
+                redirect_to user_path(@user)
+            else 
+                flash[:error_messages] = ["Incorrect password."]
+                render "new"
+            end
+        else
+            flash[:error_messages] = ["No existing user by that name. Try again or sign up as new user."]
             render "new"
         end
     end

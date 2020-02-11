@@ -10,12 +10,12 @@ Specs:
 - [x] Include reasonable validations for simple model objects (list of model objects with validations e.g. User, Recipe, Ingredient, Item) <!--- and ---> 
 - [x] Include a class level ActiveRecord scope method (model object & class method name and URL to see the working feature e.g. User.most_recipes URL: /users/most_recipes) <!--- the url /recipes/most_popular calls Recipe.order(popularity: :desc).first to show the recipe that is a part of the most lists ---> 
 - [x] Include signup (how e.g. Devise) <!--- available via URL: /users/new ---> 
-- [ ] Include login (how e.g. Devise) <!--- available via URL: /login ---> 
-- [ ] Include logout (how e.g. Devise) <!--- available via link at bottom of all pages when logged in ---> 
-- [ ] Include third party signup/login (how e.g. Devise/OmniAuth) <!--- and ---> 
-- [ ] Include nested resource show or index (URL e.g. users/2/recipes) <!--- and ---> 
-- [ ] Include nested resource "new" form (URL e.g. recipes/1/ingredients/new) <!--- and ---> 
-- [ ] Include form display of validation errors (form URL e.g. /recipes/new) <!--- and ---> 
+- [x] Include login (how e.g. Devise) <!--- available via URL: /login ---> 
+- [x] Include logout (how e.g. Devise) <!--- available via link at bottom of all pages when logged in ---> 
+- [x] Include third party signup/login (how e.g. Devise/OmniAuth) <!--- users can login with facebook from the login or new user page ---> 
+- [x] Include nested resource show or index (URL e.g. users/2/recipes) <!--- lists are nested under users ---> 
+- [x] Include nested resource "new" form (URL e.g. recipes/1/ingredients/new) <!--- lists has a new form ---> 
+- [x] Include form display of validation errors (form URL e.g. /recipes/new) <!--- lists and recipe display errors ---> 
 
 Confirm:
 - [ ] The application is pretty DRY
