@@ -10,6 +10,10 @@ class RecipesController < ApplicationController
         end
     end
 
+    def most_popular
+        Recipe.most_popular
+    end
+
     def show
         @recipe = Recipe.find(params[:id])
     end
@@ -26,11 +30,7 @@ class RecipesController < ApplicationController
             )
         @recipe.add_items(recipe_params)
         if @recipe.errors.any?
-            if @recipe.errors[:name].any?
-                flash[:error_messages] = @recipe.errors.full_messages_for(:name)
-            else
-                flash[:error_messages] = @recipe.errors.full_messages
-            end
+            flash[:error_messages] = @recipe.errors.full_messages
             render "recipes/new"
         else
             redirect_to recipe_path(@recipe)
@@ -45,12 +45,8 @@ class RecipesController < ApplicationController
         @recipe = Recipe.find(params[:id])
         @recipe.update_recipe(recipe_params)
         if @recipe.errors.any?
-            if @recipe.errors[:name].any?
-                flash[:error_messages] = @recipe.errors.full_messages_for(:name)
-            else
-                flash[:error_messages] = @recipe.errors.full_messages
-            end
-            redirect_to edit_recipe_path(@recipe)
+            flash[:error_messages] = @recipe.errors.full_messages
+            render "recipes/new"
         else
             redirect_to recipe_path(@recipe)
         end

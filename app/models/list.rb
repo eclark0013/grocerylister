@@ -1,7 +1,7 @@
 class List < ApplicationRecord 
     validates :name, presence: true
     # validates :items, :length => { :minimum => 1, :message => "must be present in recipe."}
-    # won't work because purchase items cannot be created without a list and vice versa
+    # won't work because purchase_items cannot be created without a list and vice versa
 
     has_many :list_recipes
     has_many :recipes, through: :list_recipes
@@ -67,7 +67,6 @@ class List < ApplicationRecord
                     purchase_item.quantity += (", " + additional_item.quantity)
                 end
                 purchase_item.save
-                # raise self.inspect
             end
         end
     end

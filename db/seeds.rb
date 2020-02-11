@@ -47,7 +47,6 @@ items.each do |item|
     Item.create(name: item[0], grocery_category_id: GroceryCategory.find_by(name: item[1]).id)
 end
 
-
 r1 = Recipe.create(name: "Easy one-pot pasta", user: u1, directions: "Cook the pasta with the broccoli. Cook the chicken separately and cut into small pieces. After pasta is in strainer, use pot to cook garlic in evoo. Then add back in the pasta with chicken and cheese.")
 r2 = Recipe.create(name: "Omelette with broccoli and red pepper", user: u2, directions: "Cook the broccoli and red peppers in pan with butter. Beat eggs, milk, salt, and pepper together. Add eggs and milk into pan. When finished top with cheese.")
 r3 = Recipe.create(name: "PB & J", user: u2, directions: "Put together the peanut butter and jelly to make a sandwich.")
@@ -77,4 +76,4 @@ r3 = Recipe.create(name: "PB & J", user: u2, directions: "Put together the peanu
     RecipeItem.create(recipe_id: r3.id, item_id: Item.find_or_create_by(name: "jelly").id, quantity: "1 tablespoon")
     RecipeItem.create(recipe_id: r3.id, item_id: Item.find_or_create_by(name: "bread").id, quantity: "2 slices")
 
-l1 = List.create(name: "The best grocery trip ever")
+l1 = List.create(user: u1, name: "The best grocery trip ever")

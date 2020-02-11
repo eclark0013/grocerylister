@@ -1,19 +1,30 @@
 class Recipe < ApplicationRecord
     validates :name, presence: true
-    validates :items, :length => {:minimum => 1, :message => "must be present in recipe."}
+    # validates :items, :length => {:minimum => 1, :message => "must be present in recipe."}
+    # won't work because recipe_items cannot be created without a recipe and vice versa
     
     has_many :recipe_items 
     has_many :items, through: :recipe_items
     
     has_many :list_recipes
     has_many :lists, through: :list_recipes
+    
     belongs_to :user
 
-    # accepts_nested_attributes_for :items
     accepts_nested_attributes_for :recipe_items
 
     def included
     end
+
+    def self.most_popular
+        self.order(popularity: :desc).first
+    end
+
+    def update_popularity
+        self.popularity = self.list_recipes.length
+        self.save
+    end
+
 
     def add_items(recipe_params)
         (0..recipe_params[:recipe_items_attributes].length-1).each do |num|
