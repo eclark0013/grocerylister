@@ -9,8 +9,6 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <% if session[:user_id] %>
       <%= link_to "Home", root_path %>
-    <% else %> 
-      <%= link_to "Sign In", '/login' %>
     <% end %>
     <h1> Grocery Lister </h1>
   </head>

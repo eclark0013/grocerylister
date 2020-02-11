@@ -2,7 +2,7 @@ Sign up below, new user!
 <%= form_with model: @user, local: true do |f| %>
   Username: <%= f.text_field :name %><br>
   Password: <%= f.password_field :password %>
-  <%= f.submit "Sign up" %>
+  <br><%= f.submit "Sign up" %>
 <% end %>
-Or <%= link_to('Log in with Facebook!', '/auth/facebook') %>
-
+<br>Or <%= link_to('Log in with Facebook!', '/auth/facebook') %>
+<br>Or <%= link_to('Sign in as an existing user.', '/login') %>
