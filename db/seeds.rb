@@ -76,14 +76,31 @@ r3 = Recipe.create(name: "PB & J", user: u2, directions: "Put together the peanu
     RecipeItem.create(recipe_id: r3.id, item_id: Item.find_or_create_by(name: "jelly").id, quantity: "1 tablespoon")
     RecipeItem.create(recipe_id: r3.id, item_id: Item.find_or_create_by(name: "bread").id, quantity: "2 slices")
 
-l1 = List.create(user: u1, name: "The best grocery trip ever")
+
+# make a list
+    l1 = List.create(user: u1, name: "The best grocery trip ever")
 
 # add recipes to l1
-    ListRecipe.create(recipe_id: r1.id, list_id: l1.id)
-    ListRecipe.create(recipe_id: r3.id, list_id: l1.id)
+    l1.add_recipe(r1)
+    l1.add_recipe(r3)
 
 # add additional items to l1
-    AdditionalItem.create(list_id: l1.id, item_id: Item.find_or_create_by(name: "oranges").id, quantity: "2")
-    AdditionalItem.create(list_id: l1.id, item_id: Item.find_or_create_by(name: "milk").id, quantity: "3 cups")
-    AdditionalItem.create(list_id: l1.id, item_id: Item.find_or_create_by(name: "kraft mac and cheese").id, quantity: "1 box")
-    AdditionalItem.create(list_id: l1.id, item_id: Item.find_or_create_by(name: "apples").id, quantity: "1 bag")
+    l1.add_additional_item("oranges", "3")
+    l1.add_additional_item("pears", "1 bag")
+    l1.add_additional_item("ritz crackers", "2 boxes")
+    l1.add_additional_item("peanut butter", "1 container")
+    l1.add_additional_item("brie", "1/4 pound")
+
+# make a list 2
+l2 = List.create(user: u1, name: "Another list")
+
+# add recipes to l1
+    l2.add_recipe(r2)
+    l2.add_recipe(r3)
+
+# add additional items to l1
+    l2.add_additional_item("peas", "1 bag")
+    l2.add_additional_item("broccoli", "1 bag")
+    l2.add_additional_item("chocolate bar", "1")
+    l2.add_additional_item("chopped onion", "1 cup")
+    l2.add_additional_item("romaine lettuce", "1 head")
