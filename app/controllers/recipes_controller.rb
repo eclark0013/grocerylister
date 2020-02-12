@@ -2,12 +2,12 @@ class RecipesController < ApplicationController
     before_action :require_login
     
     def index
-        if current_user
+        # if current_user
             @your_recipes = Recipe.where(user_id: current_user.id)
             @public_recipes = Recipe.where.not(user_id: current_user.id)
-        else
-            redirect_to "/login"
-        end
+        # else
+        #     redirect_to "/login"
+        # end
     end
 
     def most_popular

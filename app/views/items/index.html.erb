@@ -8,3 +8,6 @@
 </ul>
 <br>
 Create new items when you make a new recipe or list!
+<% if !session[:user_id] %>
+    <br><%= link_to "Sign up or Log in", login_path %>
+<% end %>

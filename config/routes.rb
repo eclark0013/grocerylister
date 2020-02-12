@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   get '/users/:user_id/lists/:id/edit_details' => 'lists#edit_details', as: "edit_details_user_list"
   patch '/users/:user_id/lists/:id/details' => 'lists#update_details'
   put '/users/:user_id/lists/:id/details' => 'lists#update_details'
-  get '/login' => 'sessions#new'
+  get '/login' => 'sessions#new', as: "login"
   post '/login' => 'sessions#create'
   post '/logout' => 'sessions#destroy'
   root :to => "users#home"

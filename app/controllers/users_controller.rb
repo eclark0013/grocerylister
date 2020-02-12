@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
+    before_action :require_login, only: [:show, :home]
+
     def show
-        require_login
+        flash[:error_messages] = nil
         @user = User.find_by(id: params[:id])
         if @user == nil
             redirect_to root_path
@@ -8,11 +10,9 @@ class UsersController < ApplicationController
     end
 
     def home #root path
-        if require_login
-        else
-            @user = current_user
-            render "show"
-        end
+        flash[:error_messages] = nil
+        @user = current_user
+        redirect_to user_path(@user)
     end
 
     def new #sign up page
@@ -31,7 +31,6 @@ class UsersController < ApplicationController
     end
 
     private
-
     def user_params
         params.require(:user).permit(:name, :password)
     end
