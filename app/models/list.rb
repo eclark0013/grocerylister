@@ -19,14 +19,18 @@ class List < ApplicationRecord
     accepts_nested_attributes_for :purchase_items
 
     def set_name_and_user(current_user,list_params)
-        list_name = list_params[:name]
-        if list_name == ""
-            list_name = Time.now.strftime("List created %m/%d/%Y at %I:%M%p")
-        end
         self.update(
-            name: list_name,
+            name: set_list_name(list_params[:name]),
             user_id: current_user.id
             )
+    end
+
+    def set_list_name(list_name)
+        if list_name == ""
+            list_name = Time.now.strftime("List created %m/%d/%Y at %I:%M%p")
+        else
+            list_name
+        end
     end
 
     def add_recipes(list_params)
