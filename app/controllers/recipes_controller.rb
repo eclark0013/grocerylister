@@ -2,12 +2,8 @@ class RecipesController < ApplicationController
     before_action :require_login
     
     def index
-        # if current_user
-            @your_recipes = Recipe.where(user_id: current_user.id)
-            @public_recipes = Recipe.where.not(user_id: current_user.id)
-        # else
-        #     redirect_to "/login"
-        # end
+        @your_recipes = Recipe.where(user_id: current_user.id)
+        @public_recipes = Recipe.where.not(user_id: current_user.id)
     end
 
     def most_popular
@@ -32,7 +28,7 @@ class RecipesController < ApplicationController
         @recipe.add_items(recipe_params)
         if @recipe.errors.any?
             flash[:error_messages] = @recipe.errors.full_messages
-            render "recipes/new"
+            redirect_to new_recipe_path # render causes error message to show on next page also
         else
             redirect_to recipe_path(@recipe)
         end
@@ -40,6 +36,7 @@ class RecipesController < ApplicationController
 
     def edit
         @recipe = Recipe.find(params[:id])
+        redirect_hacker(@recipe, recipes_path)
     end
 
     def update
@@ -47,7 +44,7 @@ class RecipesController < ApplicationController
         @recipe.update_recipe(recipe_params)
         if @recipe.errors.any?
             flash[:error_messages] = @recipe.errors.full_messages
-            render "recipes/new"
+            redirect_to edit_recipe_path(@recipe) # render causes error message to show on next page also
         else
             redirect_to recipe_path(@recipe)
         end
@@ -60,6 +57,6 @@ class RecipesController < ApplicationController
 
     private
     def recipe_params
-        params.require(:recipe).permit(:name, :directions, recipe_item_ids:[], recipe_items_attributes: [:quantity, :name]).to_h
+        params.require(:recipe).permit(:name, :directions, recipe_items_attributes: [:quantity, :name]).to_h
     end 
 end

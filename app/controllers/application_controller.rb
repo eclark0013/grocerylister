@@ -11,4 +11,10 @@ class ApplicationController < ActionController::Base
         redirect_to "/login" if !session[:user_id]
     end
 
+    def redirect_hacker(object, redirect_path)
+        if object.user != current_user
+            redirect_to redirect_path
+        end
+    end
+
 end

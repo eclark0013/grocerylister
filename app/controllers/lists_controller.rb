@@ -70,7 +70,7 @@ class ListsController < ApplicationController
 
     private
     def list_params
-        params.require(:list).permit(:name, recipes_ids:[], recipes_attributes: [:included, :id], additional_items_attributes: [:name, :quantity], purchase_items_ids:[], purchase_items_attributes: [:grocery_category_id, :id, :included, :quantity]).to_h
+        params.require(:list).permit(:name, recipes_attributes: [:included, :id], additional_items_attributes: [:name, :quantity], purchase_items_attributes: [:grocery_category_id, :id, :included, :quantity]).to_h
     end 
 
 end
