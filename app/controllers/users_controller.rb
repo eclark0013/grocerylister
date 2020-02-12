@@ -1,6 +1,10 @@
 class UsersController < ApplicationController
     before_action :require_login, only: [:show, :home]
 
+    def index
+        @users = User.all
+    end
+    
     def show
         flash[:error_messages] = nil
         @user = User.find_by(id: params[:id])

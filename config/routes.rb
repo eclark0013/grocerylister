@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :users, only: [:show, :new, :create] do
+  resources :users, only: [:show, :new, :create, :index] do
     resources :lists
   end
   get '/recipes/most_popular' => 'recipes#most_popular', as: 'most_popular_recipe'
