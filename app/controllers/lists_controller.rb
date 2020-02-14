@@ -2,13 +2,9 @@ class ListsController < ApplicationController
     before_action :require_login
 
     def index
-        if current_user
-            @your_lists = List.where(user_id: current_user.id)
-            @public_lists = List.where.not(user_id: current_user.id)
-            @user = current_user
-        else
-            redirect_to "/login"
-        end
+        @your_lists = List.where(user_id: current_user.id)
+        @public_lists = List.where.not(user_id: current_user.id)
+        @user = current_user
     end
     
     def show
@@ -57,7 +53,6 @@ class ListsController < ApplicationController
         @list.clear_items_from_list
         @list.add_recipes(list_params)
         @list.add_additional_items(list_params)
-        @list.save
         redirect_to user_list_path(current_user, @list)
     end
 
