@@ -12,9 +12,15 @@ class ListsController < ApplicationController
     end
     
     def show
-        @list = List.find(params[:id])
-        @user = current_user
-        @purchase_items = @list.purchase_items.order(:name)
+        @list = List.find_by(id: params[:id], user_id: params[:user_id])
+        if !@list 
+            redirect_to root_path
+        elsif @list.hacker?(current_user)
+            redirect_to user_lists_path(current_user)
+        else
+            @user = current_user
+            @purchase_items = @list.purchase_items.order(:name)
+        end
     end
 
     def new
@@ -35,8 +41,14 @@ class ListsController < ApplicationController
     end
 
     def edit
-        @list = List.find(params[:id])
-        @user = current_user 
+        @list = List.find_by(id: params[:id], user_id: params[:user_id])
+        if !@list 
+            redirect_to root_path
+        elsif @list.hacker?(current_user)
+            redirect_to user_lists_path(current_user)
+        else
+            @user = current_user
+        end 
     end
 
     def update
@@ -50,9 +62,15 @@ class ListsController < ApplicationController
     end
 
     def edit_details #allow user to edit category, quantity, and remove items from list based on kitchen inventory
-        @list = List.find(params[:id])
-        @user = current_user
-        @purchase_items = @list.purchase_items.order(:name)
+        @list = List.find_by(id: params[:id], user_id: params[:user_id])
+        if !@list 
+            redirect_to root_path
+        elsif @list.hacker?(current_user)
+            redirect_to user_lists_path(current_user)
+        else
+            @user = current_user
+            @purchase_items = @list.purchase_items.order(:name)
+        end
     end
 
     def update_details
