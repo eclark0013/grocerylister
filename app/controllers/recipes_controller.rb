@@ -36,7 +36,9 @@ class RecipesController < ApplicationController
 
     def edit
         @recipe = Recipe.find(params[:id])
-        redirect_hacker(@recipe, recipes_path)
+        if @recipe.hacker?(current_user)
+            redirect_to recipes_path
+        end
     end
 
     def update
