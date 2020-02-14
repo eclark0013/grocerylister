@@ -4,7 +4,7 @@ class UsersController < ApplicationController
     def index
         @users = User.all
     end
-    
+
     def show
         flash[:error_messages] = nil
         @user = User.find_by(id: params[:id])
@@ -15,8 +15,7 @@ class UsersController < ApplicationController
 
     def home #root path
         flash[:error_messages] = nil
-        @user = current_user
-        redirect_to user_path(@user)
+        redirect_to user_path(current_user)
     end
 
     def new #sign up page

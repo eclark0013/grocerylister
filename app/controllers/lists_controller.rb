@@ -12,6 +12,7 @@ class ListsController < ApplicationController
         if !@list 
             redirect_to root_path
         elsif @list.hacker?(current_user)
+            flash[:error_messages] = ["Users can only see their own lists."]
             redirect_to user_lists_path(current_user)
         else
             @user = current_user
@@ -41,6 +42,7 @@ class ListsController < ApplicationController
         if !@list 
             redirect_to root_path
         elsif @list.hacker?(current_user)
+            flash[:error_messages] = ["Users can only edit their own lists."]
             redirect_to user_lists_path(current_user)
         else
             @user = current_user
@@ -61,6 +63,7 @@ class ListsController < ApplicationController
         if !@list 
             redirect_to root_path
         elsif @list.hacker?(current_user)
+            flash[:error_messages] = ["Users can only edit their own lists."]
             redirect_to user_lists_path(current_user)
         else
             @user = current_user

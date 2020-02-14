@@ -37,6 +37,7 @@ class RecipesController < ApplicationController
     def edit
         @recipe = Recipe.find(params[:id])
         if @recipe.hacker?(current_user)
+            flash[:error_messages] = ["Users can only edit their own recipes."]
             redirect_to recipes_path
         end
     end
