@@ -7,7 +7,7 @@ Specs:
 - [ ] Include at least two has_many through relationships (x has_many y through z; e.g. Recipe has_many Items through Ingredients) <!--- (1) a Recipe has many Items through RecipeItems (2) a Recipe has_many Lists through List_Recipes ---> 
 - [x] Include at least one many-to-many relationship (x has_many y through z, y has_many x through z; e.g. Recipe has_many Items through Ingredients, Item has_many Recipes through Ingredients) <!--- a Recipe has many Lists through ListRecipes and a List has many Recipes through ListRecipes ---> 
 - [x] The "through" part of the has_many through includes at least one user submittable attribute, that is to say, some attribute other than its foreign keys that can be submitted by the app's user (attribute_name e.g. ingredients.quantity) <!--- a List has many Items through AdditionalItems and the AdditionalItem class has a user submittable attribute of quantity which is submitted via the lists#create action ---> 
-- [x] Include reasonable validations for simple model objects (list of model objects with validations e.g. User, Recipe, Ingredient, Item) <!--- and ---> 
+- [x] Include reasonable validations for simple model objects (list of model objects with validations e.g. User, Recipe, Ingredient, Item) <!--- Item, List, Recipe, User ---> 
 - [x] Include a class level ActiveRecord scope method (model object & class method name and URL to see the working feature e.g. User.most_recipes URL: /users/most_recipes) <!--- the url /recipes/most_popular calls Recipe.order(popularity: :desc).first to show the recipe that is a part of the most lists ---> 
 - [x] Include signup (how e.g. Devise) <!--- available via URL: /users/new ---> 
 - [x] Include login (how e.g. Devise) <!--- available via URL: /login ---> 
@@ -18,7 +18,7 @@ Specs:
 - [x] Include form display of validation errors (form URL e.g. /recipes/new) <!--- new lists, recipes, and user login display errors ---> 
 
 Confirm:
-- [ ] The application is pretty DRY
-- [ ] Limited logic in controllers
-- [ ] Views use helper methods if appropriate
-- [ ] Views use partials if appropriate
+- [x] The application is pretty DRY
+- [x] Limited logic in controllers
+- [x] Views use helper methods if appropriate
+- [x] Views use partials if appropriate
