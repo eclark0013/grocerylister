@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
     
-    def new #login page
+    def new #login page, "/login"
         if session[:user_id]
             redirect_to user_path(User.find(session[:user_id]))
         end
