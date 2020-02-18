@@ -1,5 +1,5 @@
 class RecipeItem < ApplicationRecord
-    belongs_to :recipe
+    belongs_to :recipe, counter_cache: true
     belongs_to :item
 
     def name

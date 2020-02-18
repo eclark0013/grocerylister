@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_11_164405) do
+ActiveRecord::Schema.define(version: 2020_02_18_163809) do
 
   create_table "additional_items", force: :cascade do |t|
     t.integer "list_id"
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 2020_02_11_164405) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "popularity", default: 0
+    t.integer "recipe_items_count"
   end
 
   create_table "users", force: :cascade do |t|

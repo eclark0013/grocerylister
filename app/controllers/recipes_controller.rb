@@ -6,6 +6,11 @@ class RecipesController < ApplicationController
         @public_recipes = Recipe.where.not(user_id: current_user.id)
     end
 
+    def most_ingredients
+        @recipe = Recipe.most_ingredients
+        render "most_ingredients"
+    end
+
     def most_popular
         @recipe = Recipe.most_popular
         render "most_popular_recipe"

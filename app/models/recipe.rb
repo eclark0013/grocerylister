@@ -15,8 +15,12 @@ class Recipe < ApplicationRecord
 
     attr_reader :included
 
+    def self.most_ingredients
+        self.order(recipe_items_count: :desc).limit(1).first
+    end
+
     def self.most_popular
-        self.order(popularity: :desc).first
+        self.order(popularity: :desc).limit(1).first
     end
 
     def update_popularity

@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
                 session[:user_id] = @user.id
                 redirect_to user_path(@user)
             else 
-                flash[:error_messages] = ["Incorrect password."]
+                flash.now[:error_messages] = ["Incorrect password."]
                 render "new"
             end
         else

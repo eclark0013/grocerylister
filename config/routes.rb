@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     resources :lists
   end
   get '/recipes/most_popular' => 'recipes#most_popular', as: 'most_popular_recipe'
+  get '/recipes/most_ingredients' => 'recipes#most_ingredients', as: 'most_ingredients'
   resources :recipes
   resources :items, only: [:index]
   get '/users/:user_id/lists/:id/edit_details' => 'lists#edit_details', as: "edit_details_user_list"
