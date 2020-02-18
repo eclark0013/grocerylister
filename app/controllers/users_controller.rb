@@ -6,7 +6,6 @@ class UsersController < ApplicationController
     end
 
     def show
-        flash[:error_messages] = nil
         @user = User.find_by(id: params[:id])
         if @user == nil
             redirect_to root_path
@@ -14,7 +13,6 @@ class UsersController < ApplicationController
     end
 
     def home #root path
-        flash[:error_messages] = nil
         redirect_to user_path(current_user)
     end
 
@@ -28,7 +26,7 @@ class UsersController < ApplicationController
             session[:user_id] = @user.id
             redirect_to user_path(@user)
         else
-            flash[:error_messages] = @user.errors.full_messages
+            flash.now[:error_messages] = @user.errors.full_messages
             render "new"
         end
     end

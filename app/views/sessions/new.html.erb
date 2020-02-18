@@ -1,5 +1,5 @@
 Log in below, returning user!
-<%= form_with model: User.new, url: "/login", method: :post, local: true do |f| %>
+<%= form_with model: @user, url: "/login", method: :post, local: true do |f| %>
   Username: <%= f.text_field :name %><br>
   Password: <%= f.password_field :password %><br>
   <%= f.submit "Sign in" %>

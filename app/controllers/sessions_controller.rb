@@ -4,6 +4,7 @@ class SessionsController < ApplicationController
         if session[:user_id]
             redirect_to user_path(User.find(session[:user_id]))
         end
+        @user = User.new
     end
 
     def create #login a user
@@ -16,7 +17,8 @@ class SessionsController < ApplicationController
                 render "new"
             end
         else
-            flash[:error_messages] = ["No existing user by that name. Try again or sign up as new user."]
+            @user = User.new(name: user_params[:name])
+            flash.now[:error_messages] = ["No existing user by that name. Try again or sign up as new user."]
             render "new"
         end
     end

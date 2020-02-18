@@ -16,7 +16,7 @@ class RecipesController < ApplicationController
     end
 
     def new
-        @recipe = Recipe.new
+        @recipe ||= Recipe.new
     end
 
     def create 
@@ -27,8 +27,8 @@ class RecipesController < ApplicationController
             )
         @recipe.add_items(recipe_params)
         if @recipe.errors.any?
-            flash[:error_messages] = @recipe.errors.full_messages
-            redirect_to new_recipe_path # render causes error message to show on next page also
+            flash.now[:error_messages] = @recipe.errors.full_messages
+            render new_recipe_path
         else
             redirect_to recipe_path(@recipe)
         end
@@ -47,7 +47,7 @@ class RecipesController < ApplicationController
         @recipe.update_recipe(recipe_params)
         if @recipe.errors.any?
             flash[:error_messages] = @recipe.errors.full_messages
-            redirect_to edit_recipe_path(@recipe) # render causes error message to show on next page also
+            redirect_to edit_recipe_path(@recipe)
         else
             redirect_to recipe_path(@recipe)
         end
