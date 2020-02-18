@@ -1,0 +1,5 @@
+<h2><%= "#{@recipe.name} by #{@recipe.user.name}" %><br></h2>
+
+<p> <%= "#{@recipe.name} is the recipe with the most ingredients, with a grand total of #{@recipe.recipe_items_count} ingredients!" %> </p>
+
+<%= render "shared/show_recipe", partials: {recipe: @recipe} %>
