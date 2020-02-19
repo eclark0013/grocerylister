@@ -1,18 +1,31 @@
 <!DOCTYPE html>
 <html>
   <head>
+  <link href="https://fonts.googleapis.com/css?family=Source+Serif+Pro&display=swap" rel="stylesheet">
+
     <title>Grocerylister</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <div class="top_nav>
-      <% if session[:user_id] %>
-        <%= link_to "Home", root_path %>
-      <% end %>
+    <div>
+      <ul class="top_nav" >
+        <li class="top_nav" id="gl_home"><%= link_to "GL", root_path %></li>
+        <% if session[:user_id] %>
+          <li class="top_nav" ><%= link_to "Recipes", recipes_path %></li>
+          <li class="top_nav" ><%= link_to "Lists", user_lists_path(current_user) %></li>
+          <li class="top_nav" ><%= link_to "Items", items_path %></li>
+          <li class="top_nav" ><%= link_to "Users", users_path %></li>
+          <%= form_with url: "/logout", method: :post, html: {class: "top_nav", id:"logout"}, local: true do |f| %>
+            <%= f.submit "Logout" %>
+          <% end %>
+        <% else %>
+        <li class="top_nav" id="login" ><%= link_to "Log in", login_path %></li>
+        <% end %>
+      </ul>
     </div>
-    <h1 id="page_title"> Grocery Lister </h1>
+    <h1 id="page_title"> grocery lister </h1>
   </head>
 
   <body>
@@ -20,22 +33,13 @@
 
     <%= yield %>
 
-    <br><br>
+    <!-- <br><br>
     <% if current_user %>
-    Footer:
-      <br>
-        <%= link_to "Recipes", recipes_path %>
-      <br>
-        <%= link_to "Lists", user_lists_path(current_user) %>
-      <br>
-        <%= link_to "Items", items_path %>
-      <br>
-        <%= link_to "Users", users_path %>
-      <br>
         <%= form_with url: "/logout", method: :post, local: true do |f| %>
           <%= f.submit "Logout" %>
         <% end %>
-    <% end %>
+    <% end %> 
+    -->
   </body>
   
 

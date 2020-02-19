@@ -20,8 +20,14 @@
 }
 
 body {
+    padding-top: 15px;
     margin: 22px;
     font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+}
+
+head {
+    font-family: 'Source Serif Pro', serif;
+    margin: 0px;
 }
 
 div.field_with_errors {
@@ -30,11 +36,61 @@ div.field_with_errors {
 
   #page_title {
     text-align: center;
+    font-family: 'Source Serif Pro', serif;
   }
 
   .top_nav {
       width 100%;
       overflow: hidden;
       height: 44px;
-      background-color: blue;
+  } 
+
+  ul.top_nav {
+    list-style-type: none;
+    position: fixed; /* Set the navbar to fixed position */
+    top: -16px; /* Position the navbar at the top of the page */
+    width: 100%; /* Full width */
+    margin-left: -22px;
+    padding: 0;
+    overflow: hidden;
+    background-color: #08162066;
+  }
+  
+  li.top_nav {
+    float: left;
+  }
+  
+  li.top_nav a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+
+  #gl_home a {
+    padding: 9px 16px;
+    font-size: xx-large;
+  }
+  
+  #logout {
+    float: right;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  #login {
+    float: right;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 0px 16px;
+    text-decoration: none;
+  }
+  /* Change the link color to #111 (black) on hover */
+  li.top_nav a:hover {
+    background-color: #12324966;
   }
