@@ -3,13 +3,13 @@
 <%= form_with model: @list, url: user_list_path(@user, @list), local: true do |f| %>
     <%= f.label :name%>
     <%= f.text_field :name %><br><br>
-    Choose recipes to add to list below.<br><br>
+    Choose recipes to add to list below.<br>
     <% Recipe.all.each do |recipe| %>
         <%= f.fields_for :recipes, recipe do |recipes_fields| %>
             <%= recipes_fields.check_box :included, {checked: @list.recipes.include?(recipe)}  %>
             <%= recipes_fields.label :"#{recipe.name}" %>
         <% end %><br>
-    <% end %>
+    <% end %><br>
     Add any individual items with quantities below.<br>
     <ul>
         <% @list.additional_items.each do |additional_item| %>

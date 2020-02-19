@@ -6,7 +6,7 @@
     <br>
     <br>
     Add ingredients with quantities below. Then add directions.
-    <br>
+    <br><br>
     <% @recipe.recipe_items.each do |recipe_item| %>
         <%= render partial: "shared/form_for_recipe_items", locals: {f: f, recipe_item: recipe_item} %>
     <% end %>

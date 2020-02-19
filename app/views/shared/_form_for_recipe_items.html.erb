@@ -1,4 +1,4 @@
-<li>
+<li style="line-height:normal;">
     <%= f.fields_for :recipe_items, recipe_item do |recipe_items_fields| %>
         <label> Ingredient </label>
         <%= recipe_items_fields.text_field :name, list: "item names" %> 
@@ -8,6 +8,6 @@
             <% end %>
         </datalist>
         <%= recipe_items_fields.label :quantity %>
-        <%= recipe_items_fields.text_field :quantity %><br>
+        <%= recipe_items_fields.text_field :quantity %>
     <% end %>
 </li><br>

@@ -23,6 +23,7 @@ body {
     padding-top: 15px;
     margin: 22px;
     font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    line-height: 1.5;
 }
 
 head {
@@ -43,6 +44,7 @@ div.field_with_errors {
       width 100%;
       overflow: hidden;
       height: 44px;
+      line-height: normal;
   } 
 
   ul.top_nav {

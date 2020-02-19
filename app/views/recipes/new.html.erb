@@ -1,7 +1,7 @@
 <%= form_with model: @recipe, local: true do |f| %>
     <%= f.label :name %>
     <%= f.text_field :name, placeholder: "Chicken Parmesan" %><br><br>
-    Add ingredients with quantities below. Then add directions.<br><br>
+    Add ingredients with quantities below. Then add directions.<br>
     <ul>
         <% 20.times do %>
             <%= render partial: "shared/form_for_recipe_items", locals: {f: f, recipe_item: @recipe.recipe_items.build} %>

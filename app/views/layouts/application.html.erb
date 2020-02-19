@@ -2,12 +2,13 @@
 <html>
   <head>
   <link href="https://fonts.googleapis.com/css?family=Source+Serif+Pro&display=swap" rel="stylesheet">
+  <link rel="stylesheet" media="print" href="print.css" />
 
-    <title>Grocerylister</title>
+    <title>Grocery Lister</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'application', media: 'screen', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <div>
       <ul class="top_nav" >
@@ -25,7 +26,7 @@
         <% end %>
       </ul>
     </div>
-    <h1 id="page_title"> grocery lister </h1>
+    <h1 id="page_title"> Grocery Lister </h1>
   </head>
 
   <body>
