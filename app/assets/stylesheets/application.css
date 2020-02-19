@@ -55,7 +55,7 @@ div.field_with_errors {
     margin-left: -22px;
     padding: 0;
     overflow: hidden;
-    background-color: #08162066;
+    background-color: #083466b6;
   }
   
   li.top_nav {
@@ -71,7 +71,7 @@ div.field_with_errors {
   }
 
   #gl_home a {
-    padding: 9px 16px;
+    padding: 8px 16px;
     font-size: xx-large;
   }
   
@@ -95,4 +95,29 @@ div.field_with_errors {
   /* Change the link color to #111 (black) on hover */
   li.top_nav a:hover {
     background-color: #12324966;
+  }
+
+  .bottom_nav {
+    list-style-type: none;
+    position: fixed; /* Set the navbar to fixed position */
+    bottom: 0px; /* Position the navbar at the top of the page */
+    width: 100%; /* Full width */
+    margin-left: -22px;
+    padding: 0;
+    overflow: hidden;
+    background-color: #254264;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 4px 16px;
+    text-decoration: none;
+  }
+
+  .bottom_nav a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 0px;
+    text-decoration: none;
+    display: inline;
   }

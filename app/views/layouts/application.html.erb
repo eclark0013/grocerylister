@@ -34,14 +34,11 @@
 
     <%= yield %>
 
-    <!-- <br><br>
-    <% if current_user %>
-        <%= form_with url: "/logout", method: :post, local: true do |f| %>
-          <%= f.submit "Logout" %>
-        <% end %>
-    <% end %> 
-    -->
+    <div class="bottom_nav">
+      <p> Website created by <%= link_to "Eric Clark", "https://github.com/eclark0013" %> c.2020 </p>
+    </div
   </body>
+  
   
 
 </html>
