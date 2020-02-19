@@ -21,8 +21,20 @@
 
 body {
     margin: 22px;
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
 }
 
 div.field_with_errors {
     display: inline;
+  }
+
+  #page_title {
+    text-align: center;
+  }
+
+  .top_nav {
+      width 100%;
+      overflow: hidden;
+      height: 44px;
+      background-color: blue;
   }
