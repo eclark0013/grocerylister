@@ -55,7 +55,7 @@ div.field_with_errors {
     margin-left: -22px;
     padding: 0;
     overflow: hidden;
-    background-color: #083466b6;
+    background-color: #254264;   /* or partial visibility? #083466b6; */
   }
   
   li.top_nav {
